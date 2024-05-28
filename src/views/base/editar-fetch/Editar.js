@@ -33,7 +33,8 @@ import { data } from 'autoprefixer'
 const Editar = () => {
   const [visible, setVisible] = useState(false)
   const [toast, setToast] = useState(false)
-  const [paisId, setPaisId] = useState(0)
+  const [toast2, setToast2] = useState(false)
+  const [toast3, setToast3] = useState(false)
   const [formData, setFormData] = useState({
     codigo: '',
     nombre: '',
@@ -62,7 +63,7 @@ const Editar = () => {
       sorter: false,
     },
   ]
-  const usersData = [
+  const [usersData, setUsersData] = useState([
     {
       id: 1,
       codigo: 'AD',
@@ -98,7 +99,7 @@ const Editar = () => {
       aduana: 'SI',
       prefijo: '+264',
     },
-  ]
+  ])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -108,37 +109,54 @@ const Editar = () => {
     }))
   }
 
-  const FetchEdit = async () => {
-    const API_PREFIX = 'https://localhost:44380/'
-    const res = await fetch(`${API_PREFIX}/api/Paises/Editar`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pais_Id: paisId,
-        pais_Codigo: formData.codigo,
-        pais_Nombre: formData.nombre,
-        pais_EsAduna: formData.aduana,
-        pais_prefijo: formData.prefijo,
-      }),
-    })
-    const data = await res.json()
-    console.log(data)
 
-    if (data.code === 200) {
-      setVisible(false)
-      setToast(true)
-      usersData[paisId].codigo = formData.codigo
-      userData[paisId].nombre = formData.nombre
-      userData[paisId.aduana] = formData.aduana
-      userdata[paisId].prefijo = formData.prefijo
-      setTimeout(() => {
-        setToast(false)
-      }, 2000)
-    } else {
-      setToast(false)
-      setTimeout(() => {
-        setToast(false)
-      }, 2000)
+  const FetchEdit = async () => {
+    const API_KEY = '4b567cb1c6b24b51ab55248f8e66e5cc'
+    const ENCRIPT = 'FZWv3nQTyHYyNvdx'
+    const API_PREFIX = 'https://localhost:44380/'
+    try{
+      const res = await fetch(`${API_PREFIX}api/Paises/Editar`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json', 'XApiKey': API_KEY, 'EncryptionKey': ENCRIPT },
+        body: JSON.stringify({
+          pais_Id: formData.id,
+          pais_Codigo: formData.codigo,
+          pais_Nombre: formData.nombre,
+          pais_EsAduna: formData.aduana,
+          pais_prefijo: formData.prefijo,
+          usua_UsuarioModificacion: 1,
+        }),
+      })
+      const data = await res.json()
+      console.log(data)
+  
+      if (data.data.messageStatus  >= 1) {
+        setVisible(false)
+        setToast(true)
+        let newarr = [...usersData]
+        console.log(formData.aduana)
+        newarr[formData.id-1].codigo = formData.codigo
+        newarr[formData.id-1].nombre = formData.nombre
+        newarr[formData.id-1].aduana = formData.aduana == true ? 'SI': 'NO'
+        newarr[formData.id-1].prefijo = formData.prefijo
+        console.log(newarr, 'nuevo arreglo')
+        setUsersData(newarr)
+        setTimeout(() => {
+          setToast(false)
+        }, 2000)
+        setPaisId(0)
+      } else {
+        setToast2(true)
+        setTimeout(() => {
+          setToast2(false)
+        }, 2000)
+        setPaisId(0)
+      }
+    }catch{
+      setToast3(true)
+        setTimeout(() => {
+          setToast3(false)
+        }, 2000)
     }
   }
 
@@ -172,8 +190,8 @@ const Editar = () => {
                           size="sm"
                           onClick={() => {
                             setVisible(!visible)
-                            setPaisId(item.id)
                             setFormData({
+                              id: item.id,
                               codigo: item.codigo,
                               nombre: item.nombre,
                               aduana: item.aduana === 'SI',
@@ -220,7 +238,7 @@ const Editar = () => {
                 type="text"
                 id="inputCodigo"
                 name="codigo"
-                placeholder="HND"
+                placeholder="HN"
                 value={formData.codigo}
                 onChange={handleChange}
               />
@@ -282,7 +300,18 @@ const Editar = () => {
       </CToast>
       <CToast
         autohide={false}
-        visible={toast}
+        visible={toast2}
+        color="warning"
+        className="text-white align-items-center"
+      >
+        <div className="d-flex">
+          <CToastBody>Error al Editar este pais</CToastBody>
+          <CToastClose className="me-2 m-auto" white />
+        </div>
+      </CToast>
+      <CToast
+        autohide={false}
+        visible={toast3}
         color="danger"
         className="text-white align-items-center"
       >

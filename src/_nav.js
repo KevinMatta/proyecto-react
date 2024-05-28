@@ -28,6 +28,33 @@ const _nav = [
   },
   {
     component: CNavTitle,
+    name: 'CRUDS',
+  },
+  {
+    component: CNavGroup,
+    name: 'Crud',
+    to: '/crud',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Empleados',
+        to: '/crud/empleados',
+      },
+      {
+        component: CNavItem,
+        name: 'Calidad Errores',
+        to: '/crud/caliaderrores',
+      },
+      {
+        component: CNavItem,
+        name: 'Areas',
+        to: '/crud/areas',
+      },
+    ],
+  },
+  {
+    component: CNavTitle,
     name: 'Theme',
   },
   {

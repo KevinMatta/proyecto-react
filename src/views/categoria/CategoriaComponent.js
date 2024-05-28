@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   CButton,
   CCard,
@@ -17,6 +17,11 @@ import {
   CTableHead,
   CTableRow,
   CTableDataCell,
+  CToast,
+  CToastBody,
+  CToastClose,
+  CToaster,
+  CToastHeader,
 } from '@coreui/react';
 import { listarCategorias, insertarCategoria, actualizarCategoria, eliminarCategoria } from '../../apiService';
 
@@ -26,6 +31,8 @@ const CategoriaComponent = () => {
   const [visible, setVisible] = useState(false);
   const [categoriaEditada, setCategoriaEditada] = useState(null);
   const [nombreEditado, setNombreEditado] = useState('');
+  const [toast, addToast] = useState(0);
+  const toaster = useRef();
 
   const fetchCategorias = async () => {
     try {
@@ -46,41 +53,57 @@ const CategoriaComponent = () => {
     fetchCategorias();
   }, []);
 
-  const handleInsertar = async () => {
-    try {
-      const response = await insertarCategoria(nuevaCategoria);
-      setCategorias([...categorias, response]);
-      fetchCategorias();
-    } catch (error) {
-      console.error('Error al insertar categoría', error);
-    }
-  };
+//   const handleInsertar = async () => {
+//     try {
+//       const response = await insertarCategoria(nuevaCategoria);
+//       setCategorias([...categorias, response]);
+//       fetchCategorias();
+//       addToast(exampleToast('Categoría insertada correctamente', 'success'));
+//     } catch (error) {
+//       console.error('Error al insertar categoría', error);
+//       addToast(exampleToast('No se pudo insertar la categoría', 'danger'));
+//     }
+//   };
 
   const handleActualizar = async () => {
     try {
       const updatedCategoria = { ...categoriaEditada, cate_Descripcion: nombreEditado };
       await actualizarCategoria(updatedCategoria);
-      fetchCategorias(); // Recargar las categorías después de actualizar
+      fetchCategorias();
       setVisible(false);
+      addToast(exampleToast('Categoría actualizada correctamente', 'success'));
     } catch (error) {
       console.error('Error al actualizar categoría', error);
+      addToast(exampleToast('No se pudo actualizar la categoría', 'danger'));
     }
   };
 
-  const handleEliminar = async (categoria) => {
-    try {
-      await eliminarCategoria(categoria);
-      fetchCategorias(); // Recargar las categorías después de eliminar
-    } catch (error) {
-      console.error('Error al eliminar categoría', error);
-    }
-  };
+//   const handleEliminar = async (categoria) => {
+//     try {
+//       await eliminarCategoria(categoria);
+//       fetchCategorias();
+//       addToast(exampleToast('Categoría eliminada correctamente', 'success'));
+//     } catch (error) {
+//       console.error('Error al eliminar categoría', error);
+//       addToast(exampleToast('No se pudo eliminar la categoría', 'danger'));
+//     }
+//   };
 
   const abrirModalEditar = (categoria) => {
     setCategoriaEditada(categoria);
     setNombreEditado(categoria.cate_Descripcion);
     setVisible(true);
   };
+
+  const exampleToast = (message, color) => (
+    <CToast autohide={true} delay={5000} color={color}>
+      <CToastHeader closeButton>
+        <strong className="me-auto">Notificación</strong>
+        <small>Ahora</small>
+      </CToastHeader>
+      <CToastBody>{message}</CToastBody>
+    </CToast>
+  );
 
   return (
     <CRow>
@@ -111,6 +134,7 @@ const CategoriaComponent = () => {
                 ))}
               </CTableBody>
             </CTable>
+           
           </CCardBody>
         </CCard>
       </CCol>
@@ -131,6 +155,7 @@ const CategoriaComponent = () => {
           <CButton color="primary" onClick={handleActualizar}>Guardar Cambios</CButton>
         </CModalFooter>
       </CModal>
+      <CToaster ref={toaster} push={toast} placement="top-end" />
     </CRow>
   );
 };

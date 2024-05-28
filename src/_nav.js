@@ -32,8 +32,8 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Crud',
-    to: '/crud',
+    name: 'Cruds',
+    to: '/cruds',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
@@ -43,8 +43,8 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Calidad Errores',
-        to: '/crud/caliaderrores',
+        name: 'Revision de Errores',
+        to: '/crud/revisionerrores',
       },
       {
         component: CNavItem,

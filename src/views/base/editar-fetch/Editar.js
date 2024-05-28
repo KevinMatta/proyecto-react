@@ -121,7 +121,7 @@ const Editar = () => {
           pais_Id: formData.id,
           pais_Codigo: formData.codigo,
           pais_Nombre: formData.nombre,
-          pais_EsAduna: formData.aduana,
+          pais_EsAduana: formData.aduana,
           pais_prefijo: formData.prefijo,
           usua_UsuarioModificacion: 1,
         }),

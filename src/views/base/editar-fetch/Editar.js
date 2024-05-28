@@ -8,30 +8,50 @@ import {
   CAvatar,
   CBadge,
   CRow,
+  CModal,
+  CModalBody,
+  CModalHeader,
+  CModalTitle,
+  CModalFooter,
+  CForm,
+  CFormCheck,
+  CFormInput,
+  CFormLabel,
+  CFormSelect,
+  CInputGroup,
+  CInputGroupText,
+  CFormSwitch,
+  CToast,
+  CToastHeader,
+  CToastBody,
+  CToastClose,
 } from '@coreui/react'
 import { CSmartTable } from '@coreui/react-pro'
 import { useState, useEffect } from 'react'
+import { data } from 'autoprefixer'
 
 const Editar = () => {
-  const [details, setDetails] = useState([])
+  const [visible, setVisible] = useState(false)
+  const [toast, setToast] = useState(false)
+  const [paisId, setPaisId] = useState(0)
+  const [formData, setFormData] = useState({
+    codigo: '',
+    nombre: '',
+    aduana: false,
+    prefijo: '',
+  })
   const columns = [
     {
-      key: 'avatar',
-      label: '',
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'name',
+      key: 'codigo',
       _style: { width: '20%' },
     },
-    'registered',
+    'nombre',
     {
-      key: 'role',
+      key: 'aduana',
       _style: { width: '20%' },
     },
     {
-      key: 'status',
+      key: 'prefijo',
       _style: { width: '20%' },
     },
     {
@@ -45,240 +65,233 @@ const Editar = () => {
   const usersData = [
     {
       id: 1,
-      name: 'Samppa Nori',
-      avatar: '1.jpg',
-      registered: '2022/01/01',
-      role: 'Member',
-      status: 'Active',
+      codigo: 'AD',
+      nombre: 'ANDORRA',
+      aduana: 'SI',
+      prefijo: '+376',
     },
     {
       id: 2,
-      name: 'Estavan Lykos',
-      avatar: '2.jpg',
-      registered: '2022/02/07',
-      role: 'Staff',
-      status: 'Banned',
+      codigo: 'AE',
+      nombre: 'EMIRATOS ÁRABES UNIDOS',
+      aduana: 'SI',
+      prefijo: '+971',
     },
     {
       id: 3,
-      name: 'Chetan Mohamed',
-      avatar: '3.jpg',
-      registered: '2022/02/07',
-      role: 'Admin',
-      status: 'Inactive',
-      _selected: true,
+      codigo: 'AF',
+      nombre: 'AFGANISTAN',
+      aduana: 'SI',
+      prefijo: '+93',
     },
     {
       id: 4,
-      name: 'Derick Maximinus',
-      avatar: '4.jpg',
-      registered: '2022/03/19',
-      role: 'Member',
-      status: 'Pending',
+      codigo: 'AG',
+      nombre: 'ANTIGUA Y BARBUDA',
+      aduana: 'SI',
+      prefijo: '+268',
     },
     {
       id: 5,
-      name: 'Friderik Dávid',
-      avatar: '5.jpg',
-      registered: '2022/01/21',
-      role: 'Staff',
-      status: 'Active',
-    },
-    {
-      id: 6,
-      name: 'Yiorgos Avraamu',
-      avatar: '6.jpg',
-      registered: '2022/01/01',
-      role: 'Member',
-      status: 'Active',
-    },
-    {
-      id: 7,
-      name: 'Avram Tarasios',
-      avatar: '7.jpg',
-      registered: '2022/02/07',
-      role: 'Staff',
-      status: 'Banned',
-      _selected: true,
-    },
-    {
-      id: 8,
-      name: 'Quintin Ed',
-      avatar: '8.jpg',
-      registered: '2022/02/07',
-      role: 'Admin',
-      status: 'Inactive',
-    },
-    {
-      id: 9,
-      name: 'Enéas Kwadwo',
-      avatar: '9.jpg',
-      registered: '2022/03/19',
-      role: 'Member',
-      status: 'Pending',
-    },
-    {
-      id: 10,
-      name: 'Agapetus Tadeáš',
-      avatar: '10.jpg',
-      registered: '2022/01/21',
-      role: 'Staff',
-      status: 'Active',
-    },
-    {
-      id: 11,
-      name: 'Carwyn Fachtna',
-      avatar: '11.jpg',
-      registered: '2022/01/01',
-      role: 'Member',
-      status: 'Active',
-    },
-    {
-      id: 12,
-      name: 'Nehemiah Tatius',
-      avatar: '12.jpg',
-      registered: '2022/02/07',
-      role: 'Staff',
-      status: 'Banned',
-      _selected: true,
-    },
-    {
-      id: 13,
-      name: 'Ebbe Gemariah',
-      avatar: '13.jpg',
-      registered: '2022/02/07',
-      role: 'Admin',
-      status: 'Inactive',
-    },
-    {
-      id: 14,
-      name: 'Eustorgios Amulius',
-      avatar: '14.jpg',
-      registered: '2022/03/19',
-      role: 'Member',
-      status: 'Pending',
-    },
-    {
-      id: 15,
-      name: 'Leopold Gáspár',
-      avatar: '15.jpg',
-      registered: '2022/01/21',
-      role: 'Staff',
-      status: 'Active',
+      codigo: 'AI',
+      nombre: 'ANGUILLA',
+      aduana: 'SI',
+      prefijo: '+264',
     },
   ]
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
   }
-  const toggleDetails = (index) => {
-    const position = details.indexOf(index)
-    let newDetails = details.slice()
-    if (position !== -1) {
-      newDetails.splice(position, 1)
+
+  const FetchEdit = async () => {
+    const API_PREFIX = 'https://localhost:44380/'
+    const res = await fetch(`${API_PREFIX}/api/Paises/Editar`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pais_Id: paisId,
+        pais_Codigo: formData.codigo,
+        pais_Nombre: formData.nombre,
+        pais_EsAduna: formData.aduana,
+        pais_prefijo: formData.prefijo,
+      }),
+    })
+    const data = await res.json()
+    console.log(data)
+
+    if (data.code === 200) {
+      setVisible(false)
+      setToast(true)
+      usersData[paisId].codigo = formData.codigo
+      userData[paisId].nombre = formData.nombre
+      userData[paisId.aduana] = formData.aduana
+      userdata[paisId].prefijo = formData.prefijo
+      setTimeout(() => {
+        setToast(false)
+      }, 2000)
     } else {
-      newDetails = [...details, index]
+      setToast(false)
+      setTimeout(() => {
+        setToast(false)
+      }, 2000)
     }
-    setDetails(newDetails)
   }
+
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <div> <strong>Editar</strong> <small>Ejemplo</small> </div>
-          </CCardHeader>
-          <CCardBody>
-            <CSmartTable
-              activePage={1}
-              cleaner
-              clickableRows
-              columns={columns}
-              columnFilter
-              columnSorter
-              footer
-              items={usersData}
-              itemsPerPageSelect
-              itemsPerPage={5}
-              pagination
-              onFilteredItemsChange={(items) => {
-                console.log(items)
-              }}
-              onSelectedItemsChange={(items) => {
-                console.log(items)
-              }}
-              scopedColumns={{
-                avatar: (item) => (
-                  <td>
-                    <CAvatar src={`/images/avatars/${item.avatar}`} />
-                  </td>
-                ),
-                status: (item) => (
-                  <td>
-                    <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
-                  </td>
-                ),
-                show_details: (item) => {
-                  return (
-                    <td className="py-2">
-                      <CButton
-                        color="primary"
-                        variant="outline"
-                        shape="square"
-                        size="sm"
-                        onClick={() => {
-                          toggleDetails(item.id)
-                        }}
-                      >
-                        {details.includes(item.id) ? 'Hide' : 'Show'}
-                      </CButton>
-                    </td>
-                  )
-                },
-                // details: (item) => {
-                //   return (
-                //     <CCollapse visible={details.includes(item.id)}>
-                //       <CCardBody className="p-3">
-                //         <h4>{item.username}</h4>
-                //         <p className="text-muted">User since: {item.registered}</p>
-                //         <CButton size="sm" color="info">
-                //           User Settings
-                //         </CButton>
-                //         <CButton size="sm" color="danger" className="ml-1">
-                //           Delete
-                //         </CButton>
-                //       </CCardBody>
-                //     </CCollapse>
-                //   )
-                // },
-              }}
-              // selectable
-              sorterValue={{ column: 'statu', state: 'asc' }}
-              tableFilter
-              tableProps={{
-                className: 'add-this-class',
-                responsive: true,
-                striped: true,
-                hover: true,
-              }}
-              tableBodyProps={{
-                className: 'align-middle',
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+    <>
+      <CRow>
+        <CCol xs={12}>
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>Editar</strong> <small>Ejemplo</small>
+            </CCardHeader>
+            <CCardBody>
+              <CSmartTable
+                activePage={1}
+                cleaner
+                columns={columns}
+                columnFilter
+                columnSorter
+                footer
+                items={usersData}
+                itemsPerPageSelect
+                itemsPerPage={5}
+                pagination
+                scopedColumns={{
+                  show_details: (item) => {
+                    return (
+                      <td className="py-2">
+                        <CButton
+                          color="primary"
+                          shape="square"
+                          size="sm"
+                          onClick={() => {
+                            setVisible(!visible)
+                            setPaisId(item.id)
+                            setFormData({
+                              codigo: item.codigo,
+                              nombre: item.nombre,
+                              aduana: item.aduana === 'SI',
+                              prefijo: item.prefijo,
+                            })
+                          }}
+                        >
+                          Editar
+                        </CButton>
+                      </td>
+                    )
+                  },
+                }}
+                // selectable
+                sorterValue={{ column: 'statu', state: 'asc' }}
+                tableFilter
+                tableProps={{
+                  className: 'add-this-class',
+                  responsive: true,
+                  striped: true,
+                  hover: true,
+                }}
+                tableBodyProps={{
+                  className: 'align-middle',
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+      <CModal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        aria-labelledby="LiveDemoExampleLabel"
+      >
+        <CModalHeader>
+          <CModalTitle id="LiveDemoExampleLabel">Editar</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <CForm className="row g-3">
+            <CCol md={6}>
+              <CFormLabel htmlFor="inputCodigo">Codigo</CFormLabel>
+              <CFormInput
+                type="text"
+                id="inputCodigo"
+                name="codigo"
+                placeholder="HND"
+                value={formData.codigo}
+                onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={6}>
+              <CFormLabel htmlFor="inputNombre">Nombre</CFormLabel>
+              <CFormInput
+                type="text"
+                id="inputNombre"
+                name="nombre"
+                placeholder="Honduras"
+                value={formData.nombre}
+                onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={6}>
+              <CFormLabel htmlFor="formSwitchAduana">Aduana</CFormLabel>
+              <CFormSwitch
+                size="xl"
+                label="Es una aduana"
+                id="formSwitchAduana"
+                name="aduana"
+                checked={formData.aduana}
+                onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={6}>
+              <CFormLabel htmlFor="inputPrefijo">Prefijo</CFormLabel>
+              <CFormInput
+                type="text"
+                id="inputPrefijo"
+                name="prefijo"
+                placeholder="+504"
+                value={formData.prefijo}
+                onChange={handleChange}
+              />
+            </CCol>
+          </CForm>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
+            Cancelar
+          </CButton>
+          <CButton color="primary" onClick={FetchEdit}>
+            Guardar
+          </CButton>
+        </CModalFooter>
+      </CModal>
+      <CToast
+        autohide={false}
+        visible={toast}
+        color="primary"
+        className="text-white align-items-center"
+      >
+        <div className="d-flex">
+          <CToastBody>Pais Editado Correctamente</CToastBody>
+          <CToastClose className="me-2 m-auto" white />
+        </div>
+      </CToast>
+      <CToast
+        autohide={false}
+        visible={toast}
+        color="danger"
+        className="text-white align-items-center"
+      >
+        <div className="d-flex">
+          <CToastBody>Error al Editar este pais</CToastBody>
+          <CToastClose className="me-2 m-auto" white />
+        </div>
+      </CToast>
+    </>
   )
 }
 

@@ -306,6 +306,13 @@ const _nav = [
     href: 'https://coreui.io/react/docs/templates/installation/',
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
   },
+  // Agregar la nueva entrada para Categorías
+  {
+    component: CNavItem,
+    name: 'Categorías',
+    to: '/categoria',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav

@@ -188,7 +188,7 @@ const Editar = () => {
                               id: item.id,
                               codigo: item.codigo,
                               nombre: item.nombre,
-                              aduana: item.aduana === 'SI',
+                              aduana: item.aduana === 'SI' ? true : false,
                               prefijo: item.prefijo,
                             })
                           }}

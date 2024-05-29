@@ -340,6 +340,13 @@ const _nav = [
     to: '/categoria',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
+  //Agregar la nueva entrada para Area
+  {
+    component: CNavItem,
+    name: 'Area',
+    to: '/area',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav

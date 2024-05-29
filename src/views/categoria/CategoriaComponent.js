@@ -23,7 +23,7 @@ import {
   CToaster,
   CToastHeader,
 } from '@coreui/react';
-import { listarCategorias, insertarCategoria, actualizarCategoria, eliminarCategoria } from '../../apiService';
+import { listarCategorias, insertarCategoria, actualizarCategoria, eliminarCategoria } from '../../services/apiService';
 
 const CategoriaComponent = () => {
   const [categorias, setCategorias] = useState([]);

@@ -34,7 +34,6 @@ const Editar = () => {
   const [visible, setVisible] = useState(false)
   const [toast, setToast] = useState(false)
   const [toast2, setToast2] = useState(false)
-  const [toast3, setToast3] = useState(false)
   const [formData, setFormData] = useState({
     codigo: '',
     nombre: '',
@@ -122,7 +121,7 @@ const Editar = () => {
           pais_Id: formData.id,
           pais_Codigo: formData.codigo,
           pais_Nombre: formData.nombre,
-          pais_EsAduna: formData.aduana,
+          pais_EsAduana: formData.aduana,
           pais_prefijo: formData.prefijo,
           usua_UsuarioModificacion: 1,
         }),
@@ -144,19 +143,14 @@ const Editar = () => {
         setTimeout(() => {
           setToast(false)
         }, 2000)
-        setPaisId(0)
       } else {
         setToast2(true)
         setTimeout(() => {
           setToast2(false)
         }, 2000)
-        setPaisId(0)
       }
     }catch{
-      setToast3(true)
-        setTimeout(() => {
-          setToast3(false)
-        }, 2000)
+      console.log('error')
     }
   }
 
@@ -194,7 +188,7 @@ const Editar = () => {
                               id: item.id,
                               codigo: item.codigo,
                               nombre: item.nombre,
-                              aduana: item.aduana === 'SI',
+                              aduana: item.aduana === 'SI' ? true : false,
                               prefijo: item.prefijo,
                             })
                           }}
@@ -302,17 +296,6 @@ const Editar = () => {
         autohide={false}
         visible={toast2}
         color="warning"
-        className="text-white align-items-center"
-      >
-        <div className="d-flex">
-          <CToastBody>Error al Editar este pais</CToastBody>
-          <CToastClose className="me-2 m-auto" white />
-        </div>
-      </CToast>
-      <CToast
-        autohide={false}
-        visible={toast3}
-        color="danger"
         className="text-white align-items-center"
       >
         <div className="d-flex">

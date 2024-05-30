@@ -347,6 +347,14 @@ const _nav = [
     to: '/area',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
+    //Agregar la nueva entrada para revision
+    {
+      component: CNavItem,
+      name: 'Revision de calidad',
+      to: '/revision',
+      icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    },
+
 ]
 
 export default _nav

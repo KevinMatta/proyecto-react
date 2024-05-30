@@ -25,6 +25,10 @@ import {
   actualizarCategoria,
   eliminarCategoria,
 } from '../../services/AreService';
+
+import { listarRevisiones, insertarRevision, actualizarRevision, eliminarRevision } from '../../services/revisionService';
+
+
 import axios from 'axios';
 import { CSmartTable } from '@coreui/react-pro';
 

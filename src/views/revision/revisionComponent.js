@@ -307,7 +307,7 @@ const RevisionList = () => {
         </CModalHeader>
         <CModalBody>
           <CRow>
-            <CCol xs={12} md={6}>
+            <CCol xs={12} md={6} className="mb-3">
               <CFormInput
                 type="text"
                 value={revisionEditada?.ensa_Id || nuevaRevision.ensa_Id || ''}
@@ -322,7 +322,7 @@ const RevisionList = () => {
                 placeholder="ID Ensayo"
               />
             </CCol>
-            <CCol xs={12} md={6}>
+            <CCol xs={12} md={6} className="mb-3">
               <CFormInput
                 type="text"
                 value={revisionEditada?.reca_Descripcion || nuevaRevision.reca_Descripcion || ''}
@@ -337,7 +337,7 @@ const RevisionList = () => {
                 placeholder="Descripción"
               />
             </CCol>
-            <CCol xs={12} md={6}>
+            <CCol xs={12} md={6} className="mb-3">
               <CFormInput
                 type="number"
                 value={revisionEditada?.reca_Cantidad || nuevaRevision.reca_Cantidad || ''}
@@ -352,7 +352,7 @@ const RevisionList = () => {
                 placeholder="Cantidad"
               />
             </CCol>
-            <CCol xs={12} md={6}>
+            <CCol xs={12} md={6} className="mb-3">
               <CFormSelect
                 value={revisionEditada?.reca_Scrap !== undefined ? revisionEditada.reca_Scrap : nuevaRevision.reca_Scrap || false}
                 onChange={(e) => {

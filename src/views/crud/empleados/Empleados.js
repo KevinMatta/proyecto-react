@@ -61,7 +61,7 @@ const Empleados = () => {
     }
 
     getEmployees()
-  }, [])
+  }, [visible])
 
   const [details, setDetails] = useState([])
   const columns = [
@@ -112,14 +112,18 @@ const Empleados = () => {
   const onSend = async () => {
     try {
       const nuevaFechaEliminacion = new Date()
-      setFormData({
-        empl_UsuarioEliminacion: nuevaFechaEliminacion.toISOString(),
-        usua_UsuarioEliminacion: 1,
-        empl_Id: usuarioId,
-      })
-
+      // setFormData({
+      //   empl_UsuarioEliminacion: nuevaFechaEliminacion.toISOString(),
+      //   usua_UsuarioEliminacion: 1,
+      //   empl_Id: usuarioId,
+      // })
+      formData.empl_Id = usuarioId
+      formData.usua_UsuarioEliminacion = 1
+      formData.empl_FechaEliminacion = nuevaFechaEliminacion.toISOString()
+      console.log(formData, 'usuario para eliminar')
       await eliminarEmpleado(formData)
-      navigate('/theme/crud/empleados')
+      // navigate('/theme/crud/empleados')
+      setVisible(false)
     } catch (error) {
       console.error('Error al crear el empleado:', error)
     }

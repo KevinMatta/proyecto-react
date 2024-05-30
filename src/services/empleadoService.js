@@ -7,7 +7,7 @@ const API_ENCRIPTATION = import.meta.env.VITE_ENCRIPT
 
 export const obtenerEmpleados = async () => {
   try {
-    const response = await axios.get(`${API_URL}api/Empleados/Listar`, {
+    const response = await axios.get(`${API_URL}api/Empleados/Listar?empl_EsAduana=true`, {
       headers: {
         XApiKey: API_KEY,
       },
@@ -22,7 +22,7 @@ export const obtenerEmpleados = async () => {
 
 export const obtenerEmpleadoPorId = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}api/Empleados/Listar`, {
+    const response = await axios.get(`${API_URL}api/Empleados/Listar?empl_EsAduana=true`, {
       headers: {
         XApiKey: API_KEY,
       },

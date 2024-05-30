@@ -19,6 +19,7 @@ import {
   obtenerProvincias,
   obtenerCargos,
   obtenerEmpleadoPorId,
+  editarEmpleado,
 } from '../../../services/empleadoService'
 
 import { useNavigate } from 'react-router-dom'

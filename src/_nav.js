@@ -28,7 +28,7 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'CRUDS',
   },
   {
     component: CNavGroup,
@@ -40,7 +40,8 @@ const _nav = [
         component: CNavItem,
         name: 'Empleados',
         to: '/theme/crud/empleados',
-      },]
+      },
+    ],
   },
   // {
   //   component: CNavItem,
@@ -58,7 +59,7 @@ const _nav = [
     component: CNavItem,
     name: 'Editar',
     to: '/theme/editar',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon"/>
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,

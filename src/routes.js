@@ -2,6 +2,14 @@ import { element } from 'prop-types'
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+
+//cruds
+const Empleados = React.lazy(() => import('./views/crud/empleados/Empleados'))
+const EmpleadoEditar = React.lazy(() => import('./views/crud/empleados/editar'))
+const EmpleadoCrear = React.lazy(() => import('./views/crud/empleados/crear'))
+const EmpleadoDetalle = React.lazy(() => import('./views/crud/empleados/detalle'))
+
+//theme
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -62,7 +70,11 @@ const routes = [
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
-  { path: '/theme/editar', name: 'Editar', element: Editar},
+  { path: '/theme/editar', name: 'Editar', element: Editar },
+  { path: '/theme/crud/empleados', name: 'Empleados', element: Empleados },
+  { path: '/theme/crud/empleados/crear', name: 'Crear Empleado', element: EmpleadoCrear },
+  { path: '/theme/crud/empleados/editar/:id', name: 'Editar Empleado', element: EmpleadoEditar },
+  { path: '/theme/crud/empleados/detalle/:id', name: 'Detalle Empleado', element: EmpleadoDetalle },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },

@@ -32,48 +32,34 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Cruds',
-    to: '/cruds',
+    name: 'Crud',
+    to: '/crud',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Empleados',
-        to: '/crud/empleados',
-      },
-      {
-        component: CNavItem,
-        name: 'Revision de Errores',
-        to: '/crud/revisionerrores',
-      },
-      {
-        component: CNavItem,
-        name: 'Areas',
-        to: '/crud/areas',
+        to: '/theme/crud/empleados',
       },
     ],
   },
-  {
-    component: CNavTitle,
-    name: 'Theme',
-  },
-  {
-    component: CNavItem,
-    name: 'Colors',
-    to: '/theme/colors',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Typography',
-    to: '/theme/typography',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Colors',
+  //   to: '/theme/colors',
+  //   icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Typography',
+  //   to: '/theme/typography',
+  //   icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  // },
   {
     component: CNavItem,
     name: 'Editar',
     to: '/theme/editar',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon"/>
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,

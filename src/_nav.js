@@ -28,6 +28,33 @@ const _nav = [
   },
   {
     component: CNavTitle,
+    name: 'CRUDS',
+  },
+  {
+    component: CNavGroup,
+    name: 'Cruds',
+    to: '/cruds',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Empleados',
+        to: '/crud/empleados',
+      },
+      {
+        component: CNavItem,
+        name: 'Revision de Errores',
+        to: '/crud/revisionerrores',
+      },
+      {
+        component: CNavItem,
+        name: 'Areas',
+        to: '/crud/areas',
+      },
+    ],
+  },
+  {
+    component: CNavTitle,
     name: 'Theme',
   },
   {
@@ -313,6 +340,21 @@ const _nav = [
     to: '/categoria',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
+  //Agregar la nueva entrada para Area
+  {
+    component: CNavItem,
+    name: 'Area',
+    to: '/area',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+    //Agregar la nueva entrada para revision
+    {
+      component: CNavItem,
+      name: 'Revision de calidad',
+      to: '/revision',
+      icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    },
+
 ]
 
 export default _nav

@@ -13,6 +13,13 @@ import {
   CCardBody,
   CCardHeader,
   CFormCheck,
+  CTable,
+  CTableHead,
+  CTableRow,
+  CTableBody,
+  CTableFoot,
+  CTableDataCell,
+ CTableHeaderCell,
 } from '@coreui/react'
 import {
   crearEmpleado,
@@ -116,6 +123,27 @@ function EmpleadoDetalle() {
             <div>{empleadoData.empl_EsAduana ? 'Sí' : 'No'}</div>
           </CCol>
         </CRow>
+        <CTable bordered responsive>
+                          <CTableHead>
+                            <CTableRow>
+                              <CTableHeaderCell>Acción</CTableHeaderCell>
+                              <CTableHeaderCell>Usuario</CTableHeaderCell>
+                              <CTableHeaderCell>Fecha</CTableHeaderCell>
+                            </CTableRow>
+                          </CTableHead>
+                          <CTableBody>
+                            <CTableRow>
+                              <CTableDataCell>Creador</CTableDataCell>
+                              <CTableDataCell>{empleadoData.usuarioCreacionNombre}</CTableDataCell>
+                              <CTableDataCell>{new Date(empleadoData.empl_FechaCreacion).toLocaleString()}</CTableDataCell>
+                            </CTableRow>
+                            <CTableRow>
+                              <CTableDataCell>Modificador</CTableDataCell>
+                              <CTableDataCell>{empleadoData.usuarioModificacionNombre ?? 'N/A'}</CTableDataCell>
+                              <CTableDataCell>{new Date(empleadoData.empl_FechaModificacion).toLocaleString()}</CTableDataCell>
+                            </CTableRow>
+                          </CTableBody>
+                        </CTable>
       </CCardBody>
       <CCardFooter>
         <CButton color="primary" onClick={volver}>

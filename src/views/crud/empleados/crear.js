@@ -19,7 +19,6 @@ import {
   obtenerEstadosCiviles,
   obtenerProvincias,
   obtenerCargos,
-  tipoToast
 } from '../../../services/empleadoService'
 
 function EmpleadoCrear() {

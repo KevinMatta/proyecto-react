@@ -19,6 +19,7 @@ import {
   obtenerEstadosCiviles,
   obtenerProvincias,
   obtenerCargos,
+  tipoToast
 } from '../../../services/empleadoService'
 
 function EmpleadoCrear() {
@@ -82,6 +83,8 @@ function EmpleadoCrear() {
       }))
       console.log(formData)
       await crearEmpleado(formData)
+      tipoToast = 'crear'
+      // setTipoToast('crear')
       navigate('/theme/crud/empleados')
     } catch (error) {
       console.error('Error al crear el empleado:', error)

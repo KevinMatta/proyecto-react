@@ -1,9 +1,12 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios'
+import { useState } from 'react'
 
 const API_URL = import.meta.env.VITE_API_URL
 const API_KEY = import.meta.env.VITE_API_KEY
 const API_ENCRIPTATION = import.meta.env.VITE_ENCRIPT
+// export const [tipoToast, setTipoToas] = useState('')
+export let tipoToast = ''
 
 export const obtenerEmpleados = async () => {
   try {

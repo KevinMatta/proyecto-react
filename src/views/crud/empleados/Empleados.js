@@ -38,9 +38,11 @@ import { useState, useEffect } from 'react'
 import { data } from 'autoprefixer'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilPencil, cilSearch, cilTrash } from '@coreui/icons'
-import { obtenerEmpleados, eliminarEmpleado } from '../../../services/empleadoService'
+import { obtenerEmpleados, eliminarEmpleado, } from '../../../services/empleadoService'
 
 const Empleados = () => {
+  
+  const [toast, setToast] = useState(0);
   const [provincias, setProvincias] = useState([])
   const [visible, setVisible] = useState(false)
   const [usuarioId, setUsuarioId] = useState()
@@ -49,6 +51,18 @@ const Empleados = () => {
     usua_UsuarioEliminacion: '',
     empl_FechaEliminacion: '',
   })
+
+  // useEffect(() => {
+  //   if(tipoToast == 'crear'){
+  //     setToast(exampleToast('Empleado Ingresado correctamente', 'success'));
+  //   }
+  //   if(tipoToast == 'editar'){
+  //     setToast(exampleToast('Empleado Editado correctamente', 'success'));
+  //   }
+  //   if(tipoToast == 'eliminar'){
+  //     setToast(exampleToast('Empleado Eliminado correctamente', 'success'));
+  //   }
+  // }, [tipoToast])
 
   useEffect(() => {
     const getEmployees = async () => {
@@ -128,6 +142,16 @@ const Empleados = () => {
       console.error('Error al crear el empleado:', error)
     }
   }
+
+  const exampleToast = (message, color) => (
+    <CToast autohide={true} delay={5000} color={color}>
+      <CToastHeader closeButton>
+        <strong className="me-auto">Notificación</strong>
+        <small>Ahora</small>
+      </CToastHeader>
+      <CToastBody>{message}</CToastBody>
+    </CToast>
+  );
 
   return (
     <>

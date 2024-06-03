@@ -83,7 +83,7 @@ function EmpleadoCrear() {
       }))
       console.log(formData)
       await crearEmpleado(formData)
-      tipoToast = 'crear'
+     // tipoToast = 'crear'
       // setTipoToast('crear')
       navigate('/theme/crud/empleados')
     } catch (error) {

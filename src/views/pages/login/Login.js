@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -12,11 +12,55 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+  CToast,
+  CToastBody,
+  CToastHeader,
+  CToaster,
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { cilLockLocked, cilUser } from '@coreui/icons';
+import { login } from '../../../services/authService';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [toast, setToast] = useState(0);
+  const toaster = useRef();
+  const navigate = useNavigate();
+
+  const exampleToast = (message, color) => (
+    <CToast autohide={true} delay={5000} color={color}>
+      <CToastHeader closeButton>
+        <strong className="me-auto">Notificación</strong>
+        <small>Ahora</small>
+      </CToastHeader>
+      <CToastBody>{message}</CToastBody>
+    </CToast>
+  );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await login({ usua_Nombre: email, usua_Contrasenia: password });
+
+      if (response.code === 200) {
+        console.log('Login successful:', response.data);
+        navigate('/dashboard');
+        setToast(exampleToast('Login successful', 'success'));
+      } else {
+        setError('El usuario o contraseña son incorrectos');
+        setToast(exampleToast('El usuario o contraseña son incorrectos', 'danger'));
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+      setError('Error al conectar con el servidor');
+      setToast(exampleToast('Error al conectar con el servidor', 'danger'));
+    }
+  };
+
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -25,14 +69,20 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-body-secondary">Sign In to your account</p>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput
+                        placeholder="Username"
+                        autoComplete="username"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -42,11 +92,13 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton type="submit" color="primary" className="px-4">
                           Login
                         </CButton>
                       </CCol>
@@ -79,8 +131,9 @@ const Login = () => {
           </CCol>
         </CRow>
       </CContainer>
+      <CToaster ref={toaster} push={toast} placement="top-end" />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

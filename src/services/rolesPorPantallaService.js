@@ -89,3 +89,19 @@ export const RolInsertar = async (formData) => {
     throw error
   }
 }
+
+export const RolEliminar = async () => {
+  try {
+    const response = await axios.post(`${API_URL}api/Roles/Eliminar`, formData, {
+      headers: {
+        XApiKey: API_KEY,
+        EncryptionKey: API_ENCRIPTATION,
+      },
+    })
+    console.log(response.data, 'ELIMINAR')
+    return response.data
+  } catch (error) {
+    console.error('Error al crear el empleado:', error)
+    throw error
+  }
+}

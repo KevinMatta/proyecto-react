@@ -10,10 +10,12 @@ import {
   CFormInput,
   CCol,
   CButton,
+  CFormLabel,
+  CFormSwitch,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilChevronRight, cilChevronBottom } from '@coreui/icons'
-import { getPantallas } from '../../../services/rolesPorPantallaService'
+import { getPantallas, RolInsertar } from '../../../services/rolesPorPantallaService'
 
 const TreeView = ({ nodos, handleCheckbox }) => {
   const [expandednodos, setExpandednodos] = useState({})
@@ -72,6 +74,13 @@ const TreeView = ({ nodos, handleCheckbox }) => {
 function RolesPorPantallaCrear() {
   const [nodos, setnodos] = useState([])
   const [PantallasSeleccionadas, setPantallasSeleccionadas] = useState([])
+  const [formData, setFormData] = useState({
+    role_Descripcion: '',
+    pant_Ids: '',
+    role_Aduana: false,
+    usua_UsuarioCreacion: 1,
+    role_FechaCreacion: '',
+  })
 
   useEffect(() => {
     const getData = async () => {
@@ -89,16 +98,16 @@ function RolesPorPantallaCrear() {
             nodo.checked = !checked
             nodo.children.forEach((nodito) => {
               nodito.checked = !checked
-              updatePantallasSeleccionadas(nodito.pant_Id, !checked)
+              updatePantallasSeleccionadas(nodito.pant_Id, nodito.pant_Nombre, !checked)
             })
           }
-          updatePantallasSeleccionadas(nodo.pant_Id, !checked)
+          updatePantallasSeleccionadas(nodo.pant_Id, nodo.pant_Nombre, !checked)
         }
         if (nivel === 2) {
           nodo.children = nodo.children.map((nodito) => {
             if (nodito.pant_Id === id) {
               nodito.checked = !checked
-              updatePantallasSeleccionadas(nodito.pant_Id, !checked)
+              updatePantallasSeleccionadas(nodito.pant_Id, nodito.pant_Nombre, !checked)
             }
             return nodito
           })
@@ -109,12 +118,20 @@ function RolesPorPantallaCrear() {
     setnodos(toggleCheck(nodos))
   }
 
-  const updatePantallasSeleccionadas = (id, checked) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+  }
+
+  const updatePantallasSeleccionadas = (id, nombre, checked) => {
     setPantallasSeleccionadas((prevPantallasSeleccionadas) => {
       if (checked) {
-        return [...prevPantallasSeleccionadas, id]
+        return [...prevPantallasSeleccionadas, { pant_Id: id }]
       } else {
-        return prevPantallasSeleccionadas.filter((selectedId) => selectedId !== id)
+        return prevPantallasSeleccionadas.filter((obj) => obj.pant_Id !== id)
       }
     })
   }
@@ -123,14 +140,20 @@ function RolesPorPantallaCrear() {
   const handleSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
+    const nuevaFechaCreacion = new Date()
+    formData.role_FechaCreacion = nuevaFechaCreacion.toISOString()
 
     const form = event.currentTarget
     if (form.checkValidity() === false) {
       setValidated(true)
     } else {
-      setPantallasSeleccionadas((prevSelected) => prevSelected.filter((id) => id !== undefined))
-      const idsFiltrados = PantallasSeleccionadas.filter((id) => id !== undefined)
-      console.log('enviar datos', idsFiltrados)
+      setPantallasSeleccionadas((prevSelected) =>
+        prevSelected.filter((obj) => obj.pant_Id !== undefined),
+      )
+      const idsFiltrados = PantallasSeleccionadas.filter((obj) => obj.pant_Id !== undefined)
+      formData.pant_Ids = JSON.stringify(idsFiltrados)
+      RolInsertar(formData)
+      navigate('/theme/crud/rolesporpantalla')
     }
   }
 
@@ -147,12 +170,25 @@ function RolesPorPantallaCrear() {
           <CCol md={4}>
             <CFormInput
               type="text"
-              id="roltxt"
+              id="role_Descripcion"
+              name="role_Descripcion"
               label="Rol"
               placeholder="Roles"
               aria-describedby="exampleFormControlInputHelpInline"
               required
               feedbackInvalid="Escriba un Rol"
+              // value={formData.role_Descripcion}
+              onChange={handleChange}
+            />
+          </CCol>
+          <CCol md={4}>
+            <CFormLabel htmlFor="role_Aduana">Es Aduana</CFormLabel>
+            <CFormSwitch
+              size="xl"
+              id="role_Aduana"
+              name="role_Aduana"
+              checked={formData.role_Aduana}
+              onChange={handleChange}
             />
           </CCol>
           <div style={{ marginTop: '30px' }}>

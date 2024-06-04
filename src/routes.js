@@ -8,10 +8,10 @@ const Empleados = React.lazy(() => import('./views/crud/empleados/Empleados'))
 const EmpleadoEditar = React.lazy(() => import('./views/crud/empleados/editar'))
 const EmpleadoCrear = React.lazy(() => import('./views/crud/empleados/crear'))
 const EmpleadoDetalle = React.lazy(() => import('./views/crud/empleados/detalle'))
-const RolesPorPantalla = React.lazy(() => import('./views/crud/roles-por-patalla/index'))
-const RolesPorPantallaCrear = React.lazy(() => import('./views/crud/roles-por-patalla/crear'))
-const RolesPorPantallaDetalle = React.lazy(() => import('./views/crud/roles-por-patalla/detalle'))
-const RolesPorPantallaEditar = React.lazy(() => import('./views/crud/roles-por-patalla/editar'))
+const RolesPorPantalla = React.lazy(() => import('./views/pantallas/roles/index'))
+const RolesPorPantallaCrear = React.lazy(() => import('./views/pantallas/roles/crear'))
+const RolesPorPantallaDetalle = React.lazy(() => import('./views/pantallas/roles/detalle'))
+const RolesPorPantallaEditar = React.lazy(() => import('./views/pantallas/roles/editar'))
 
 //theme
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -312,7 +312,10 @@ const routes = [
 { path: '/pantallas/regímenes aduaneros/regímenes aduaneros', name: 'Regímenes Aduaneros', element: Regimenes },
 { path: '/pantallas/reportes de módulos/reportes de módulos', name: 'Reportes de Módulos', element: Reportes },
 { path: '/pantallas/revisión de calidad/revisión de calidad', name: 'Revisión de Calidad', element: Revicion },
-{ path: '/pantallas/roles/roles', name: 'Roles', element: Roles },
+{ path: '/pantallas/roles/index', name: 'Roles', element: RolesPorPantalla },
+{ path: '/pantallas/roles/crear', name: 'Roles crear', element: RolesPorPantallaCrear },
+{ path: '/pantallas/roles/detalle/:id', name: 'Roles detalle', element: RolesPorPantallaDetalle },
+{ path: '/pantallas/roles/Editar/:id', name: 'Roles Editar', element: RolesPorPantallaEditar },
 { path: '/pantallas/seguimiento de procesos/seguimiento de procesos', name: 'Seguimiento de Procesos', element: Seguimiento },
 { path: '/pantallas/subcategorias/subcategorias', name: 'Subcategorias', element: Subcategoria },
 { path: '/pantallas/tallas/tallas', name: 'Tallas', element: Tallas },

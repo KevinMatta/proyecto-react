@@ -157,7 +157,7 @@ const Tiempo = React.lazy(() => import('./views/pantallas/tiempos de máquinas/t
 const Tipo_D = React.lazy(() => import('./views/pantallas/tipo de documento/tipo de documento'))
 const Tipo_E = React.lazy(() => import('./views/pantallas/tipo de embalaje/tipo de embalaje'))
 const Tipo_L = React.lazy(() => import('./views/pantallas/tipo de liquidación/tipo de liquidación'))
-const Tipo_Id = React.lazy(() => import('./views/pantallas/tipos de Identificacion/tipos de Identificacion'))
+const Tipo_Id = React.lazy(() => import('./views/pantallas/tipos de identificacion/tipos de identificacion'))
 const Tipo_In = React.lazy(() => import('./views/pantallas/tipos de intermediarios/tipos de intermediarios'))
 const Unidades = React.lazy(() => import('./views/pantallas/unidades de medida/unidades de medida'))
 const Usuarios = React.lazy(() => import('./views/pantallas/usuarios/usuarios'))
@@ -320,7 +320,7 @@ const routes = [
 { path: '/pantallas/tipo de documento/tipo de documento', name: 'Tipo de Documento', element: Tipo_D },
 { path: '/pantallas/tipo de embalaje/tipo de embalaje', name: 'Tipo de Embalaje', element: Tipo_E },
 { path: '/pantallas/tipo de liquidación/tipo de liquidación', name: 'Tipo de Liquidación', element: Tipo_L }, // Ruta agregada
-{ path: '/pantallas/tipos de Identificacion/tipos de Identificacion', name: 'Tipos de Identificacion', element: Tipo_Id },
+{ path: '/pantallas/tipos de identificacion/tipos de identificacion', name: 'Tipos de identificacion', element: Tipo_Id },
 { path: '/pantallas/tipos de intermediarios/tipos de intermediarios', name: 'Tipos de Intermediarios', element: Tipo_In },
 { path: '/pantallas/unidades de medida/unidades de medida', name: 'Unidades de medida', element: Unidades },
 { path: '/pantallas/usuarios/usuarios', name: 'Usuarios', element: Usuarios }

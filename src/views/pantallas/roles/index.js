@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, sesionStorage, useRef } from 'react'
 import {
   CFormCheck,
   CCard,
@@ -19,6 +19,10 @@ import {
   CModalBody,
   CModalFooter,
   CModalTitle,
+  CToast,
+  CToastHeader,
+  CToastBody,
+  CToaster,
 } from '@coreui/react'
 import { Link, useNavigate } from 'react-router-dom'
 import CIcon from '@coreui/icons-react'
@@ -40,6 +44,14 @@ function RolesPorPantalla() {
   const [formData, setFormData] = useState({})
   const [visible, setVisible] = useState(false)
   const navigate = useNavigate()
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
+  const [notificacion, setNotificacion] = useState({
+    estado: '',
+    color: '',
+    titulo: '',
+    mensaje: '',
+  })
 
   const columns = [
     {
@@ -66,9 +78,42 @@ function RolesPorPantalla() {
       const list = await getRoles()
       setRoles(list)
       console.log(list)
+      sessionStorage.setItem(
+        'notificacion',
+        JSON.stringify({
+          estado: '',
+          color: '',
+          titulo: '',
+          mensaje: '',
+        }),
+      )
     }
     getData()
   }, [visible])
+
+  useEffect(() => {
+    const notify = () => {
+      if (notificacion.estado == 'eliminar') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == 'editar') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == 'crear') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == '') {
+        // sesionStorage.notificacion
+      }
+      setNotificacion({
+        estado: '',
+        color: '',
+        titulo: '',
+        mensaje: '',
+      })
+    }
+    notify()
+  }, [notificacion.estado])
 
   const toggleDetails = (roleId) => {
     const newDetails = details.includes(roleId)
@@ -84,12 +129,52 @@ function RolesPorPantalla() {
       formData.usua_UsuarioEliminacion = 1
       formData.role_FechaEliminacion = nuevaFechaEliminacion.toISOString()
       console.log(formData, 'rol para eliminar')
-      await RolEliminar(formData)
+      const res = await RolEliminar(formData)
+      console.log(res.data.messageStatus, 'onSend')
+      if (res.data.messageStatus == 1) {
+        setNotificacion({
+          estado: 'eliminar',
+          color: 'success',
+          titulo: 'Exito',
+          mensaje: 'Rol eliminado con exito',
+        })
+      } else {
+        setNotificacion({
+          estado: 'eliminar',
+          color: 'warning',
+          titulo: 'Advertencia',
+          mensaje: 'No se pudo eliminar el rol',
+        })
+      }
       setVisible(false)
     } catch (error) {
       console.error('Error al eliminar el empleado:', error)
+      setNotificacion({
+        estado: 'eliminar',
+        color: 'error',
+        titulo: 'Error',
+        mensaje: 'error en la peticion',
+      })
     }
+    // sessionStorage.setItem(
+    //   'notificacion',
+    //   JSON.stringify({
+    //     estado: 'eliminar',
+    //     color: '',
+    //     titulo: '',
+    //     mensaje: '',
+    //   }),
+    // )
   }
+
+  const exampleToast = (
+    <CToast color={notificacion.color}>
+      <CToastHeader closeButton>
+        <div className="fw-bold me-auto">{notificacion.titulo}</div>
+      </CToastHeader>
+      <CToastBody>{notificacion.mensaje}</CToastBody>
+    </CToast>
+  )
 
   return (
     <>
@@ -97,7 +182,7 @@ function RolesPorPantalla() {
         <CCardHeader>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <strong>Roles por Pantalla</strong>
-            <Link to="crear">
+            <Link to="/pantallas/roles/crear">
               <CButton color="primary" shape="square">
                 Crear
               </CButton>
@@ -154,7 +239,9 @@ function RolesPorPantalla() {
                           size="sm"
                         ></CDropdownToggle>
                         <CDropdownMenu>
-                          <CDropdownItem onClick={() => navigate(`editar/${item.role_Id}`)}>
+                          <CDropdownItem
+                            onClick={() => navigate(`/pantallas/roles/editar/${item.role_Id}`)}
+                          >
                             <CIcon
                               icon={cilPencil}
                               customClassName="nav-icon"
@@ -164,7 +251,9 @@ function RolesPorPantalla() {
                             />
                             Editar
                           </CDropdownItem>
-                          <CDropdownItem onClick={() => navigate(`detalle/${item.role_Id}`)}>
+                          <CDropdownItem
+                            onClick={() => navigate(`/pantallas/roles/detalle/${item.role_Id}`)}
+                          >
                             <CIcon
                               icon={cilSearch}
                               customClassName="nav-icon"
@@ -262,6 +351,7 @@ function RolesPorPantalla() {
           </CButton>
         </CModalFooter>
       </CModal>
+      <CToaster className="p-3" placement="top-end" push={toast} ref={toaster} />
     </>
   )
 }

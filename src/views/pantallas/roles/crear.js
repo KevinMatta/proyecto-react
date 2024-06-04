@@ -156,12 +156,12 @@ function RolesPorPantallaCrear() {
       const idsFiltrados = PantallasSeleccionadas.filter((obj) => obj.pant_Id !== undefined)
       formData.pant_Ids = JSON.stringify(idsFiltrados)
       RolInsertar(formData)
-      navigate('/theme/rolesporpantalla')
+      navigate('/pantallas/roles/index')
     }
   }
 
   const volver = () => {
-    navigate('/theme/rolesporpantalla')
+    navigate('/pantallas/roles/index')
   }
 
   return (

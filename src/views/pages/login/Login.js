@@ -47,14 +47,14 @@ const Login = () => {
       const response = await login({ usua_Nombre: email, usua_Contrasenia: password });
 
       if (response.code === 200) {
-        const { empl_EsAduana, role_Id, usua_EsAdmin } = response.data;
+        const { usua_esAduana, role_Id, usua_EsAdmin } = response.data;
         console.log('Login successful:', response.data);
-        console.log('empl_EsAduana:', empl_EsAduana);
+        console.log('usua_esAduana:', usua_esAduana);
         console.log('role_Id:', role_Id);
         console.log('usua_EsAdmin:', usua_EsAdmin);
 
         // Guardar los valores en sessionStorage
-        sessionStorage.setItem('empl_EsAduana', empl_EsAduana);
+        sessionStorage.setItem('usua_esAduana', usua_esAduana);
         sessionStorage.setItem('role_Id', role_Id);
         sessionStorage.setItem('usua_EsAdmin', usua_EsAdmin);
 

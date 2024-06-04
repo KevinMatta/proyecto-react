@@ -10,7 +10,7 @@ import {
   cilPencil,
   cilPuzzle,
   cilSpeedometer,
-  cilStar
+  cilStar,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -28,7 +28,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Roles',
-        to: '/pantallas/roles',
+        to: '/pantallas/roles/index',
       },
     ],
   },
@@ -335,5 +335,6 @@ const _nav = [
       },
     ],
   },
+]
 
 export default _nav

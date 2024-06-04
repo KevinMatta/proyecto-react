@@ -1,5 +1,5 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
+import React from 'react';
+import CIcon from '@coreui/icons-react';
 import {
   cilBell,
   cilCalculator,
@@ -10,9 +10,15 @@ import {
   cilPencil,
   cilPuzzle,
   cilSpeedometer,
-  cilStar,
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+  cilStar
+} from '@coreui/icons';
+import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react';
+
+
+// Obtener valores de sessionStorage
+const isAdmin = sessionStorage.getItem('usua_EsAdmin') === 'true';
+const roleId = sessionStorage.getItem('role_Id');
+const isAduana = sessionStorage.getItem('usua_esAduana') === 'true';
 
 const _nav = [
   {
@@ -24,13 +30,15 @@ const _nav = [
         component: CNavItem,
         name: 'Usuarios',
         to: '/pantallas/usuarios',
+        visible: isAdmin,
       },
       {
         component: CNavItem,
         name: 'Roles',
         to: '/pantallas/roles/index',
+        visible: isAdmin,
       },
-    ],
+    ].filter(item => item.visible !== false), // Filtrar items no visibles
   },
   {
     component: CNavGroup,
@@ -41,66 +49,79 @@ const _nav = [
         component: CNavItem,
         name: 'Formas de envío',
         to: '/pantallas/formas de envío',
+        visible: roleId === 'formas de envío',
       },
       {
         component: CNavItem,
         name: 'Monedas',
         to: '/pantallas/monedas',
+        visible: roleId === 'monedas',
       },
       {
         component: CNavItem,
         name: 'Tipos de Identificacion',
         to: '/pantallas/tipos de identificacion',
+        visible: roleId === 'tipos de identificacion',
       },
       {
         component: CNavItem,
         name: 'Unidades de medida',
         to: '/pantallas/unidades de medida',
+        visible: roleId === 'unidades de medida',
       },
       {
         component: CNavItem,
         name: 'Aldeas',
         to: '/pantallas/aldeas',
+        visible: roleId === 'aldeas',
       },
       {
         component: CNavItem,
         name: 'Ciudades',
         to: '/pantallas/ciudades',
+        visible: roleId === 'ciudades',
       },
       {
         component: CNavItem,
         name: 'Colonias',
         to: '/pantallas/colonias',
+        visible: roleId === 'colonias',
       },
       {
         component: CNavItem,
         name: 'Países',
         to: '/pantallas/países',
+        visible: roleId === 'países',
       },
       {
         component: CNavItem,
         name: 'Provincias',
         to: '/pantallas/provincias',
+        visible: roleId === 'provincias',
       },
       {
         component: CNavItem,
         name: 'Clientes',
         to: '/pantallas/clientes',
+        visible: roleId === 'clientes',
       },
       {
         component: CNavItem,
         name: 'Empleados',
         to: '/pantallas/empleados',
+        visible: roleId === 'empleados',
       },
       {
         component: CNavItem,
         name: 'Proveedores',
         to: '/pantallas/proveedores',
+        visible: roleId === 'proveedores',
       },
       {
         component: CNavItem,
         name: 'Personas',
         to: '/pantallas/personas',
+        visible: roleId === 'personas',
       },
     ],
   },
@@ -113,88 +134,105 @@ const _nav = [
         component: CNavItem,
         name: 'Aduanas',
         to: '/pantallas/aduanas',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Oficinas Aduaneras',
         to: '/pantallas/oficinas aduaneras',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Oficios y Profesiones',
         to: '/pantallas/oficios y profesiones',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Declaracion de valor',
         to: '/pantallas/declaracion de valor',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Duca',
         to: '/pantallas/duca',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Estados Civiles',
         to: '/pantallas/estados civiles',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Estados de las mercancías',
         to: '/pantallas/estados de las mercancías',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Estados del boletín',
         to: '/pantallas/estados del boletín',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Aranceles',
         to: '/pantallas/aranceles',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Código de Impuestos',
         to: '/pantallas/código de impuestos',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Concepto de Pago',
         to: '/pantallas/concepto de pago',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Impuestos',
         to: '/pantallas/impuestos',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Incoterms',
         to: '/pantallas/incoterms',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Tipo de Liquidación',
         to: '/pantallas/tipo de liquidación',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Boletin de Pago',
         to: '/pantallas/boletin de pago',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Documento de Sanciones',
         to: '/pantallas/documento de sanciones',
+        visible: isAduana,
       },
       {
         component: CNavItem,
         name: 'Regímenes Aduaneros',
         to: '/pantallas/regímenes aduaneros',
+        visible: isAduana,
       },
-    ],
+    ].filter(item => item.visible !== false), // Filtrar items no visibles
   },
   {
     component: CNavGroup,
@@ -335,6 +373,6 @@ const _nav = [
       },
     ],
   },
-]
+];
 
-export default _nav
+export default _nav;

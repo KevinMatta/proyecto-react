@@ -68,6 +68,100 @@ const Categoria = React.lazy(() => import('./views/categoria/CategoriaComponent'
 const Area = React.lazy(() => import('./views/area/AreaComponent'))
 const Revision = React.lazy(() => import('./views/revision/revisionComponent'))
 
+//Pantallas de dibujado
+const Acuerdos = React.lazy(() => import('./views/pantallas/acuerdos TLC/acuerdos TLC'))
+const Aduanas = React.lazy(() => import('./views/pantallas/aduanas/aduanas'))
+const Aldeas = React.lazy(() => import('./views/pantallas/aldeas/aldeas'))
+const Aranceles = React.lazy(() => import('./views/pantallas/aranceles/aranceles'))
+const Areas = React.lazy(() => import('./views/pantallas/areas/areas'))
+const Boletin = React.lazy(() => import('./views/pantallas/boletin de pago/boletin de pago'))
+const Cargos = React.lazy(() => import('./views/pantallas/cargos/cargos'))
+const Categorias = React.lazy(() => import('./views/pantallas/categorías/categorías'))
+const Ciudades = React.lazy(() => import('./views/pantallas/ciudades/ciudades'))
+const Clientes = React.lazy(() => import('./views/pantallas/clientes/clientes'))
+const Colonias = React.lazy(() => import('./views/pantallas/colonias/colonias'))
+const Codigo = React.lazy(() => import('./views/pantallas/código de impuestos/código de impuestos'))
+const Colores = React.lazy(() => import('./views/pantallas/colores/colores'))
+const Comerciante = React.lazy(() => import('./views/pantallas/comerciante individual/comerciante individual'))
+const Concepto = React.lazy(() => import('./views/pantallas/concepto de pago/concepto de pago'))
+const Condiciones = React.lazy(() => import('./views/pantallas/condiciones comerciales/condiciones comerciales'))
+const Consumo = React.lazy(() => import('./views/pantallas/consumo de materiales/consumo de materiales'))
+const Contratos = React.lazy(() => import('./views/pantallas/contratos de adhesion/contratos de adhesion'))
+const Costos = React.lazy(() => import('./views/pantallas/costos de materiales/costos de materiales'))
+const Declaracion = React.lazy(() => import('./views/pantallas/declaracion de valor/declaracion de valor'))
+const Devas = React.lazy(() => import('./views/pantallas/DEVAS pendientes/DEVAS pendientes'))
+const Documentos = React.lazy(() => import('./views/pantallas/documento de sanciones/documento de sanciones'))
+const Duca = React.lazy(() => import('./views/pantallas/duca/duca'))
+
+//pendiente
+const Empleado = React.lazy(() => import('./views/pantallas/empleados/empleados'))
+const Estados = React.lazy(() => import('./views/pantallas/estados civiles/estados civiles'))
+const Estados_M = React.lazy(() => import('./views/pantallas/estados de las mercancías/estados de las mercancías'))
+const Estados_B = React.lazy(() => import('./views/pantallas/estados del boletín/estados del boletín'))
+const Estilos = React.lazy(() => import('./views/pantallas/estilos/estilos'))
+const Facturas = React.lazy(() => import('./views/pantallas/factura de exportacion/factura de exportacion'))
+const Formas = React.lazy(() => import('./views/pantallas/formas de envío/formas de envío'))
+const Formas_P = React.lazy(() => import('./views/pantallas/formas de pago/formas de pago'))
+
+const Funciones = React.lazy(() => import('./views/pantallas/funciones de máquinas/funciones de máquinas'))
+const Historial = React.lazy(() => import('./views/pantallas/historial de máquinas/historial de máquinas'))
+const Importaciones = React.lazy(() => import('./views/pantallas/importaciones/importaciones'))
+const Impuestos = React.lazy(() => import('./views/pantallas/impuestos/impuestos'))
+const Impuestos_P = React.lazy(() => import('./views/pantallas/impuestos prod/impuestos prod'))
+const Incoterms = React.lazy(() => import('./views/pantallas/incoterms/incoterms'))
+const Ingresos = React.lazy(() => import('./views/pantallas/ingreso de materiales/ingreso de materiales'))
+const Inicio_A = React.lazy(() => import('./views/pantallas/inicio aduana/inicio aduana'))
+const Inicio_G = React.lazy(() => import('./views/pantallas/inicio general/inicio general'))
+const Inicio_P = React.lazy(() => import('./views/pantallas/inicio produccion/inicio produccion'))
+const Inventario = React.lazy(() => import('./views/pantallas/inventario/inventario'))
+const Lotes = React.lazy(() => import('./views/pantallas/lotes/lotes'))
+const Lugares = React.lazy(() => import('./views/pantallas/lugares de embarque/lugares de embarque'))
+const Maquinas = React.lazy(() => import('./views/pantallas/máquinas/máquinas'))
+const Maquinas_H = React.lazy(() => import('./views/pantallas/máquinas habilitadas/máquinas habilitadas'))
+const Marcas_C = React.lazy(() => import('./views/pantallas/marcas de carros/marcas de carros'))
+const Marcas = React.lazy(() => import('./views/pantallas/marcas de máquinas/marcas de máquinas'))
+const Materiales = React.lazy(() => import('./views/pantallas/materiales/materiales'))
+const Materiales_B = React.lazy(() => import('./views/pantallas/materiales a brindar/materiales a brindar'))
+const Materiales_O = React.lazy(() => import('./views/pantallas/materiales por orden de compra/materiales por orden de compra'))
+const Modelos = React.lazy(() => import('./views/pantallas/modelos de máquinas/modelos de máquinas'))
+const Modulos = React.lazy(() => import('./views/pantallas/módulos/módulos'))
+const Modedas = React.lazy(() => import('./views/pantallas/monedas/monedas'))
+const Niveles = React.lazy(() => import('./views/pantallas/niveles comerciales/niveles comerciales'))
+const Oficinas = React.lazy(() => import('./views/pantallas/oficinas aduaneras/oficinas aduaneras'))
+const Oficios = React.lazy(() => import('./views/pantallas/oficios y profesiones/oficios y profesiones'))
+const Orden_C = React.lazy(() => import('./views/pantallas/orden de compra/orden de compra'))
+const Orden_P = React.lazy(() => import('./views/pantallas/orden de pedido/orden de pedido'))
+const Paises = React.lazy(() => import('./views/pantallas/países/países'))
+const Pedidos_P = React.lazy(() => import('./views/pantallas/pedidos de producción/pedidos de producción'))
+const Pedidos_C = React.lazy(() => import('./views/pantallas/pedidos por cliente/pedidos por cliente'))
+const Persona_J = React.lazy(() => import('./views/pantallas/persona juridica/persona juridica'))
+const Persona_N = React.lazy(() => import('./views/pantallas/persona natural/persona natural'))
+const Persona = React.lazy(() => import('./views/pantallas/personas/personas'))
+const Planificaciones = React.lazy(() => import('./views/pantallas/planificación/planificación'))
+const Procesos = React.lazy(() => import('./views/pantallas/procesos/procesos'))
+const Produccion_M = React.lazy(() => import('./views/pantallas/produccion de módulos/produccion de módulos'))
+const Produccion_A = React.lazy(() => import('./views/pantallas/producción por areas/producción por areas'))
+const Produccion_P = React.lazy(() => import('./views/pantallas/producción por país/producción por país'))
+const Programacion = React.lazy(() => import('./views/pantallas/programación orden de compra/programación orden de compra'))
+const Proveedores = React.lazy(() => import('./views/pantallas/proveedores/proveedores'))
+const Provincias = React.lazy(() => import('./views/pantallas/provincias/provincias'))
+const Rastreo = React.lazy(() => import('./views/pantallas/rastreo de la orden de compra/rastreo de la orden de compra'))
+const Regimenes = React.lazy(() => import('./views/pantallas/regímenes aduaneros/regímenes aduaneros'))
+const Reportes = React.lazy(() => import('./views/pantallas/reportes de módulos/reportes de módulos'))
+const Revicion = React.lazy(() => import('./views/pantallas/revisión de calidad/revisión de calidad'))
+const Roles = React.lazy(() => import('./views/pantallas/roles/roles'))
+const Seguimiento = React.lazy(() => import('./views/pantallas/seguimiento de procesos/seguimiento de procesos'))
+const Subcategoria = React.lazy(() => import('./views/pantallas/subcategorias/subcategorias'))
+const Tallas = React.lazy(() => import('./views/pantallas/tallas/tallas'))
+const Tiempo = React.lazy(() => import('./views/pantallas/tiempos de máquinas/tiempos de máquinas'))
+const Tipo_D = React.lazy(() => import('./views/pantallas/tipo de documento/tipo de documento'))
+const Tipo_E = React.lazy(() => import('./views/pantallas/tipo de embalaje/tipo de embalaje'))
+const Tipo_L = React.lazy(() => import('./views/pantallas/tipo de liquidación/tipo de liquidación'))
+const Tipo_Id = React.lazy(() => import('./views/pantallas/tipos de Identificacion/tipos de Identificacion'))
+const Tipo_In = React.lazy(() => import('./views/pantallas/tipos de intermediarios/tipos de intermediarios'))
+const Unidades = React.lazy(() => import('./views/pantallas/unidades de medida/unidades de medida'))
+const Usuarios = React.lazy(() => import('./views/pantallas/usuarios/usuarios'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -137,6 +231,101 @@ const routes = [
   { path: '/categoria', name: 'Categoria', element: Categoria },
   { path: '/area', name: 'Area', element: Area },
   { path: '/revision', name: 'Revision', element: Revision },
+
+
+
+//pantallas dibujado
+{ path: '/pantallas/acuerdos TLC/acuerdos TLC', name: 'Acuerdos TLC', element: Acuerdos },
+{ path: '/pantallas/aduanas/aduanas', name: 'Aduanas', element: Aduanas },
+{ path: '/pantallas/aldeas/aldeas', name: 'Aldeas', element: Aldeas },
+{ path: '/pantallas/aranceles/aranceles', name: 'Aranceles', element: Aranceles },
+{ path: '/pantallas/areas/areas', name: 'Areas', element: Areas },
+{ path: '/pantallas/boletin de pago/boletin de pago', name: 'Boletin de Pago', element: Boletin },
+{ path: '/pantallas/cargos/cargos', name: 'Cargos', element: Cargos },
+{ path: '/pantallas/categorías/categorías', name: 'Categorias', element: Categorias },
+{ path: '/pantallas/ciudades/ciudades', name: 'Ciudades', element: Ciudades },
+{ path: '/pantallas/clientes/clientes', name: 'Clientes', element: Clientes },
+{ path: '/pantallas/colonias/colonias', name: 'Colonias', element: Colonias }, // Ruta agregada
+{ path: '/pantallas/código de impuestos/código de impuestos', name: 'Código de Impuestos', element: Codigo },
+{ path: '/pantallas/colores/colores', name: 'Colores', element: Colores },
+{ path: '/pantallas/comerciante individual/comerciante individual', name: 'Comerciante Individual', element: Comerciante },
+{ path: '/pantallas/concepto de pago/concepto de pago', name: 'Concepto de Pago', element: Concepto },
+{ path: '/pantallas/condiciones comerciales/condiciones comerciales', name: 'Condiciones Comerciales', element: Condiciones },
+{ path: '/pantallas/consumo de materiales/consumo de materiales', name: 'Consumo de Materiales', element: Consumo },
+{ path: '/pantallas/contratos de adhesion/contratos de adhesion', name: 'Contratos de Adhesion', element: Contratos },
+{ path: '/pantallas/costos de materiales/costos de materiales', name: 'Costos de Materiales', element: Costos },
+{ path: '/pantallas/declaracion de valor/declaracion de valor', name: 'Declaracion de valor', element: Declaracion },
+{ path: '/pantallas/DEVAS pendientes/DEVAS pendientes', name: 'DEVAS Pendientes', element: Devas },
+{ path: '/pantallas/documento de sanciones/documento de sanciones', name: 'Documento de Sanciones', element: Documentos },
+{ path: '/pantallas/duca/duca', name: 'Duca', element: Duca },
+{ path: '/pantallas/empleados/empleados', name: 'Empleados', element: Empleado },
+{ path: '/pantallas/estados civiles/estados civiles', name: 'Estados Civiles', element: Estados },
+{ path: '/pantallas/estados de las mercancías/estados de las mercancías', name: 'Estados de las mercancías', element: Estados_M },
+{ path: '/pantallas/estados del boletín/estados del boletín', name: 'Estados del Boletín', element: Estados_B },
+{ path: '/pantallas/estilos/estilos', name: 'Estilos', element: Estilos },
+{ path: '/pantallas/factura de exportacion/factura de exportacion', name: 'Factura de exportacion', element: Facturas },
+{ path: '/pantallas/formas de envío/formas de envío', name: 'Formas de envío', element: Formas },
+{ path: '/pantallas/formas de pago/formas de pago', name: 'Formas de Pago', element: Formas_P },
+{ path: '/pantallas/funciones de máquinas/funciones de máquinas', name: 'Funciones de Máquinas', element: Funciones },
+{ path: '/pantallas/historial de máquinas/historial de máquinas', name: 'Historial de Máquinas', element: Historial },
+{ path: '/pantallas/importaciones/importaciones', name: 'Importaciones', element: Importaciones },
+{ path: '/pantallas/impuestos/impuestos', name: 'Impuestos', element: Impuestos },
+{ path: '/pantallas/impuestos prod/impuestos prod', name: 'Impuestos Prod', element: Impuestos_P },
+{ path: '/pantallas/incoterms/incoterms', name: 'Incoterms', element: Incoterms },
+{ path: '/pantallas/ingreso de materiales/ingreso de materiales', name: 'Ingreso de Materiales', element: Ingresos },
+{ path: '/pantallas/inicio aduana/inicio aduana', name: 'Inicio Aduana', element: Inicio_A },
+{ path: '/pantallas/inicio general/inicio general', name: 'Inicio General', element: Inicio_G },
+{ path: '/pantallas/inicio produccion/inicio produccion', name: 'Inicio Produccion', element: Inicio_P },
+{ path: '/pantallas/inventario/inventario', name: 'Inventario', element: Inventario },
+{ path: '/pantallas/lotes/lotes', name: 'Lotes', element: Lotes },
+{ path: '/pantallas/lugares de embarque/lugares de embarque', name: 'Lugares de Embarque', element: Lugares },
+{ path: '/pantallas/máquinas/máquinas', name: 'Máquinas', element: Maquinas },
+{ path: '/pantallas/máquinas habilitadas/máquinas habilitadas', name: 'Máquinas Habilitadas', element: Maquinas_H },
+{ path: '/pantallas/marcas de carros/marcas de carros', name: 'Marcas de Carros', element: Marcas_C },
+{ path: '/pantallas/marcas de máquinas/marcas de máquinas', name: 'Marcas de Máquinas', element: Marcas },
+{ path: '/pantallas/materiales/materiales', name: 'Materiales', element: Materiales },
+{ path: '/pantallas/materiales a brindar/materiales a brindar', name: 'Materiales a Brindar', element: Materiales_B },
+{ path: '/pantallas/materiales por orden de compra/materiales por orden de compra', name: 'Materiales por Orden de Compra', element: Materiales_O },
+{ path: '/pantallas/modelos de máquinas/modelos de máquinas', name: 'Modelos de Máquinas', element: Modelos },
+{ path: '/pantallas/módulos/módulos', name: 'Módulos', element: Modulos },
+{ path: '/pantallas/monedas/monedas', name: 'Monedas', element: Modedas },
+{ path: '/pantallas/niveles comerciales/niveles comerciales', name: 'Niveles Comerciales', element: Niveles },
+{ path: '/pantallas/oficinas aduaneras/oficinas aduaneras', name: 'Oficinas Aduaneras', element: Oficinas },
+{ path: '/pantallas/oficios y profesiones/oficios y profesiones', name: 'Oficios y Profesiones', element: Oficios },
+{ path: '/pantallas/orden de compra/orden de compra', name: 'Órden de Compra', element: Orden_C },
+{ path: '/pantallas/orden de pedido/orden de pedido', name: 'Órden de Pedido', element: Orden_P },
+{ path: '/pantallas/países/países', name: 'Países', element: Paises },
+{ path: '/pantallas/pedidos de producción/pedidos de producción', name: 'Pedidos de Producción', element: Pedidos_P },
+{ path: '/pantallas/pedidos por cliente/pedidos por cliente', name: 'Pedidos Por Cliente', element: Pedidos_C },
+{ path: '/pantallas/persona juridica/persona juridica', name: 'Persona Juridica', element: Persona_J },
+{ path: '/pantallas/persona natural/persona natural', name: 'Persona Natural', element: Persona_N },
+{ path: '/pantallas/personas/personas', name: 'Personas', element: Persona },
+{ path: '/pantallas/planificación/planificación', name: 'Planificación', element: Planificaciones },
+{ path: '/pantallas/procesos/procesos', name: 'Procesos', element: Procesos },
+{ path: '/pantallas/produccion de módulos/produccion de módulos', name: 'Produccion de Módulos', element: Produccion_M },
+{ path: '/pantallas/producción por areas/producción por areas', name: 'Producción por Areas', element: Produccion_A },
+{ path: '/pantallas/producción por país/producción por país', name: 'Producción por país', element: Produccion_P },
+{ path: '/pantallas/programación orden de compra/programación orden de compra', name: 'Programación Órden de Compra', element: Programacion },
+{ path: '/pantallas/proveedores/proveedores', name: 'Proveedores', element: Proveedores },
+{ path: '/pantallas/provincias/provincias', name: 'Provincias', element: Provincias },
+{ path: '/pantallas/rastreo de la orden de compra/rastreo de la orden de compra', name: 'Rastreo de la Orden de Compra', element: Rastreo },
+{ path: '/pantallas/regímenes aduaneros/regímenes aduaneros', name: 'Regímenes Aduaneros', element: Regimenes },
+{ path: '/pantallas/reportes de módulos/reportes de módulos', name: 'Reportes de Módulos', element: Reportes },
+{ path: '/pantallas/revisión de calidad/revisión de calidad', name: 'Revisión de Calidad', element: Revicion },
+{ path: '/pantallas/roles/roles', name: 'Roles', element: Roles },
+{ path: '/pantallas/seguimiento de procesos/seguimiento de procesos', name: 'Seguimiento de Procesos', element: Seguimiento },
+{ path: '/pantallas/subcategorias/subcategorias', name: 'Subcategorias', element: Subcategoria },
+{ path: '/pantallas/tallas/tallas', name: 'Tallas', element: Tallas },
+{ path: '/pantallas/tiempos de máquinas/tiempos de máquinas', name: 'Tiempos de Máquinas', element: Tiempo },
+{ path: '/pantallas/tipo de documento/tipo de documento', name: 'Tipo de Documento', element: Tipo_D },
+{ path: '/pantallas/tipo de embalaje/tipo de embalaje', name: 'Tipo de Embalaje', element: Tipo_E },
+{ path: '/pantallas/tipo de liquidación/tipo de liquidación', name: 'Tipo de Liquidación', element: Tipo_L }, // Ruta agregada
+{ path: '/pantallas/tipos de Identificacion/tipos de Identificacion', name: 'Tipos de Identificacion', element: Tipo_Id },
+{ path: '/pantallas/tipos de intermediarios/tipos de intermediarios', name: 'Tipos de Intermediarios', element: Tipo_In },
+{ path: '/pantallas/unidades de medida/unidades de medida', name: 'Unidades de medida', element: Unidades },
+{ path: '/pantallas/usuarios/usuarios', name: 'Usuarios', element: Usuarios }
+
+
 ]
 
 export default routes

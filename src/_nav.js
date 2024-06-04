@@ -6,334 +6,334 @@ import {
   cilChartPie,
   cilCursor,
   cilDescription,
-  cilDrop,
   cilNotes,
   cilPencil,
   cilPuzzle,
   cilSpeedometer,
-  cilStar,
+  cilStar
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'CRUDS',
+    component: CNavGroup,
+    name: 'Acceso',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Usuarios',
+        to: '/pantallas/usuarios',
+      },
+      {
+        component: CNavItem,
+        name: 'Roles',
+        to: '/pantallas/roles',
+      },
+    ],
   },
   {
     component: CNavGroup,
-    name: 'Crud',
-    to: '/crud',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    name: 'General',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
+      {
+        component: CNavItem,
+        name: 'Formas de envío',
+        to: '/pantallas/formas de envío',
+      },
+      {
+        component: CNavItem,
+        name: 'Monedas',
+        to: '/pantallas/monedas',
+      },
+      {
+        component: CNavItem,
+        name: 'Tipos de Identificacion',
+        to: '/pantallas/tipos de identificacion',
+      },
+      {
+        component: CNavItem,
+        name: 'Unidades de medida',
+        to: '/pantallas/unidades de medida',
+      },
+      {
+        component: CNavItem,
+        name: 'Aldeas',
+        to: '/pantallas/aldeas',
+      },
+      {
+        component: CNavItem,
+        name: 'Ciudades',
+        to: '/pantallas/ciudades',
+      },
+      {
+        component: CNavItem,
+        name: 'Colonias',
+        to: '/pantallas/colonias',
+      },
+      {
+        component: CNavItem,
+        name: 'Países',
+        to: '/pantallas/países',
+      },
+      {
+        component: CNavItem,
+        name: 'Provincias',
+        to: '/pantallas/provincias',
+      },
+      {
+        component: CNavItem,
+        name: 'Clientes',
+        to: '/pantallas/clientes',
+      },
       {
         component: CNavItem,
         name: 'Empleados',
-        to: '/theme/crud/empleados',
-      },
-    ],
-  },
-  {
-    component: CNavItem,
-    name: 'Roles Por Pantalla',
-    to: '/theme/rolesporpantalla',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Editar',
-    to: '/theme/editar',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'Components',
-  },
-  {
-    component: CNavGroup,
-    name: 'Base',
-    to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Accordion',
-        to: '/base/accordion',
+        to: '/pantallas/empleados',
       },
       {
         component: CNavItem,
-        name: 'Breadcrumb',
-        to: '/base/breadcrumbs',
+        name: 'Proveedores',
+        to: '/pantallas/proveedores',
       },
       {
         component: CNavItem,
-        name: 'Cards',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Carousel',
-        to: '/base/carousels',
-      },
-      {
-        component: CNavItem,
-        name: 'Collapse',
-        to: '/base/collapses',
-      },
-      {
-        component: CNavItem,
-        name: 'List group',
-        to: '/base/list-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Navs & Tabs',
-        to: '/base/navs',
-      },
-      {
-        component: CNavItem,
-        name: 'Pagination',
-        to: '/base/paginations',
-      },
-      {
-        component: CNavItem,
-        name: 'Placeholders',
-        to: '/base/placeholders',
-      },
-      {
-        component: CNavItem,
-        name: 'Popovers',
-        to: '/base/popovers',
-      },
-      {
-        component: CNavItem,
-        name: 'Progress',
-        to: '/base/progress',
-      },
-      {
-        component: CNavItem,
-        name: 'Spinners',
-        to: '/base/spinners',
-      },
-      {
-        component: CNavItem,
-        name: 'Tables',
-        to: '/base/tables',
-      },
-      {
-        component: CNavItem,
-        name: 'Tooltips',
-        to: '/base/tooltips',
+        name: 'Personas',
+        to: '/pantallas/personas',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Buttons',
-    to: '/buttons',
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Buttons',
-        to: '/buttons/buttons',
-      },
-      {
-        component: CNavItem,
-        name: 'Buttons groups',
-        to: '/buttons/button-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Dropdowns',
-        to: '/buttons/dropdowns',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Forms',
+    name: 'Aduana',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Form Control',
-        to: '/forms/form-control',
+        name: 'Aduanas',
+        to: '/pantallas/aduanas',
       },
       {
         component: CNavItem,
-        name: 'Select',
-        to: '/forms/select',
+        name: 'Oficinas Aduaneras',
+        to: '/pantallas/oficinas aduaneras',
       },
       {
         component: CNavItem,
-        name: 'Checks & Radios',
-        to: '/forms/checks-radios',
+        name: 'Oficios y Profesiones',
+        to: '/pantallas/oficios y profesiones',
       },
       {
         component: CNavItem,
-        name: 'Range',
-        to: '/forms/range',
+        name: 'Declaracion de valor',
+        to: '/pantallas/declaracion de valor',
       },
       {
         component: CNavItem,
-        name: 'Input Group',
-        to: '/forms/input-group',
+        name: 'Duca',
+        to: '/pantallas/duca',
       },
       {
         component: CNavItem,
-        name: 'Floating Labels',
-        to: '/forms/floating-labels',
+        name: 'Estados Civiles',
+        to: '/pantallas/estados civiles',
       },
       {
         component: CNavItem,
-        name: 'Layout',
-        to: '/forms/layout',
+        name: 'Estados de las mercancías',
+        to: '/pantallas/estados de las mercancías',
       },
       {
         component: CNavItem,
-        name: 'Validation',
-        to: '/forms/validation',
+        name: 'Estados del boletín',
+        to: '/pantallas/estados del boletín',
+      },
+      {
+        component: CNavItem,
+        name: 'Aranceles',
+        to: '/pantallas/aranceles',
+      },
+      {
+        component: CNavItem,
+        name: 'Código de Impuestos',
+        to: '/pantallas/código de impuestos',
+      },
+      {
+        component: CNavItem,
+        name: 'Concepto de Pago',
+        to: '/pantallas/concepto de pago',
+      },
+      {
+        component: CNavItem,
+        name: 'Impuestos',
+        to: '/pantallas/impuestos',
+      },
+      {
+        component: CNavItem,
+        name: 'Incoterms',
+        to: '/pantallas/incoterms',
+      },
+      {
+        component: CNavItem,
+        name: 'Tipo de Liquidación',
+        to: '/pantallas/tipo de liquidación',
+      },
+      {
+        component: CNavItem,
+        name: 'Boletin de Pago',
+        to: '/pantallas/boletin de pago',
+      },
+      {
+        component: CNavItem,
+        name: 'Documento de Sanciones',
+        to: '/pantallas/documento de sanciones',
+      },
+      {
+        component: CNavItem,
+        name: 'Regímenes Aduaneros',
+        to: '/pantallas/regímenes aduaneros',
       },
     ],
-  },
-  {
-    component: CNavItem,
-    name: 'Charts',
-    to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
-    name: 'Icons',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    name: 'Producción',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
+        name: 'Planificación',
+        to: '/pantallas/planificación',
       },
       {
         component: CNavItem,
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
+        name: 'Módulos',
+        to: '/pantallas/módulos',
       },
       {
         component: CNavItem,
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
+        name: 'Órden de Procesos',
+        to: '/pantallas/orden de procesos',
+      },
+      {
+        component: CNavItem,
+        name: 'Órden de Compra',
+        to: '/pantallas/orden de compra',
+      },
+      {
+        component: CNavItem,
+        name: 'Órden de Pedido',
+        to: '/pantallas/orden de pedido',
+      },
+      {
+        component: CNavItem,
+        name: 'Pedidos de Producción',
+        to: '/pantallas/pedidos de producción',
+      },
+      {
+        component: CNavItem,
+        name: 'Procesos',
+        to: '/pantallas/procesos',
+      },
+      {
+        component: CNavItem,
+        name: 'Produccion de Módulos',
+        to: '/pantallas/produccion de módulos',
+      },
+      {
+        component: CNavItem,
+        name: 'Producción por Areas',
+        to: '/pantallas/producción por areas',
+      },
+      {
+        component: CNavItem,
+        name: 'Producción por País',
+        to: '/pantallas/producción por país',
+      },
+      {
+        component: CNavItem,
+        name: 'Programación Órden de Compra',
+        to: '/pantallas/programación orden de compra',
+      },
+      {
+        component: CNavItem,
+        name: 'Ingreso de Materiales',
+        to: '/pantallas/ingreso de materiales',
       },
     ],
   },
   {
     component: CNavGroup,
-    name: 'Notifications',
-    icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    name: 'Reportes',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Alerts',
-        to: '/notifications/alerts',
+        name: 'Reportes de Módulos',
+        to: '/pantallas/reportes de módulos',
       },
       {
         component: CNavItem,
-        name: 'Badges',
-        to: '/notifications/badges',
+        name: 'Revisión de Calidad',
+        to: '/pantallas/revisión de calidad',
       },
       {
         component: CNavItem,
-        name: 'Modal',
-        to: '/notifications/modals',
+        name: 'Seguimiento de Procesos',
+        to: '/pantallas/seguimiento de procesos',
       },
       {
         component: CNavItem,
-        name: 'Toasts',
-        to: '/notifications/toasts',
+        name: 'Subcategorias',
+        to: '/pantallas/subcategorias',
+      },
+      {
+        component: CNavItem,
+        name: 'Tallas',
+        to: '/pantallas/tallas',
+      },
+      {
+        component: CNavItem,
+        name: 'Tiempos de Máquinas',
+        to: '/pantallas/tiempos de máquinas',
+      },
+      {
+        component: CNavItem,
+        name: 'Costos de Materiales',
+        to: '/pantallas/costos de materiales',
+      },
+      {
+        component: CNavItem,
+        name: 'Consumo de Materiales',
+        to: '/pantallas/consumo de materiales',
+      },
+      {
+        component: CNavItem,
+        name: 'Pedidos Por Cliente',
+        to: '/pantallas/pedidos por cliente',
+      },
+      {
+        component: CNavItem,
+        name: 'Materiales por Orden de Compra',
+        to: '/pantallas/materiales por orden de compra',
+      },
+      {
+        component: CNavItem,
+        name: 'DEVAS Pendientes',
+        to: '/pantallas/DEVAS pendientes',
+      },
+      {
+        component: CNavItem,
+        name: 'Importaciones',
+        to: '/pantallas/importaciones',
+      },
+      {
+        component: CNavItem,
+        name: 'Facturas de Exportacion',
+        to: '/pantallas/factura de exportacion',
       },
     ],
   },
-  {
-    component: CNavItem,
-    name: 'Widgets',
-    to: '/widgets',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'Extras',
-  },
-  {
-    component: CNavGroup,
-    name: 'Pages',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Login',
-        to: '/login',
-      },
-      {
-        component: CNavItem,
-        name: 'Register',
-        to: '/register',
-      },
-      {
-        component: CNavItem,
-        name: 'Error 404',
-        to: '/404',
-      },
-      {
-        component: CNavItem,
-        name: 'Error 500',
-        to: '/500',
-      },
-    ],
-  },
-  {
-    component: CNavItem,
-    name: 'Docs',
-    href: 'https://coreui.io/react/docs/templates/installation/',
-    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
-  // Agregar la nueva entrada para Categorías
-  {
-    component: CNavItem,
-    name: 'Categorías',
-    to: '/categoria',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  //Agregar la nueva entrada para Area
-  {
-    component: CNavItem,
-    name: 'Area',
-    to: '/area',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  //Agregar la nueva entrada para revision
-  {
-    component: CNavItem,
-    name: 'Revision de calidad',
-    to: '/revision',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-]
 
 export default _nav

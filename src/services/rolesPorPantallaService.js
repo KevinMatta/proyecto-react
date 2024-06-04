@@ -145,6 +145,7 @@ export const RolEditar = async (formData) => {
         'Content-Type': 'application/json',
       },
     })
+    console.log(response.data)
     return response.data
   } catch (error) {
     console.error('Error al editar el rol:', error)

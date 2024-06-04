@@ -47,6 +47,7 @@ function RolesPorPantallaDetalle() {
           .toISOString()
           .split('T')[0]
         setRolData(rolData)
+        console.log(rolData, 'rol data detalle')
       } catch (err) {
         console.error('error al cargar rol', err)
       }
@@ -55,7 +56,7 @@ function RolesPorPantallaDetalle() {
   }, [])
 
   const volver = () => {
-    navigate('/theme/rolesporpantalla')
+    navigate('/pantallas/roles/index')
   }
 
   return (

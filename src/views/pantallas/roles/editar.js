@@ -140,14 +140,15 @@ function RolesPorPantallaEditar() {
       )
       const idsFiltrados = PantallasSeleccionadas.filter((obj) => obj.pant_Id !== undefined)
       formData.pant_Ids = JSON.stringify(idsFiltrados)
-      RolEditar(formData)
+      formData.detalles = ''
       console.log(formData)
-      // navigate('/theme/rolesporpantalla')
+      RolEditar(formData)
+      // navigate('/pantallas/roles/index')
     }
   }
 
   const volver = () => {
-    navigate('/theme/rolesporpantalla')
+    navigate('/pantallas/roles/index')
   }
 
   return (

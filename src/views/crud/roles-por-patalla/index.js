@@ -20,7 +20,7 @@ import {
   CModalFooter,
   CModalTitle,
 } from '@coreui/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CIcon from '@coreui/icons-react'
 import {
   cilChevronRight,
@@ -30,7 +30,7 @@ import {
   cilSearch,
   cilTrash,
 } from '@coreui/icons'
-import { getRoles } from '../../../services/rolesPorPantallaService'
+import { getRoles, RolEliminar } from '../../../services/rolesPorPantallaService'
 import { CSmartTable } from '@coreui/react-pro'
 
 function RolesPorPantalla() {
@@ -38,8 +38,9 @@ function RolesPorPantalla() {
   const [details, setDetails] = useState([])
   const [rolId, setRolId] = useState()
   const [formData, setFormData] = useState({})
-
   const [visible, setVisible] = useState(false)
+  const navigate = useNavigate()
+
   const columns = [
     {
       key: 'show_details',
@@ -67,7 +68,7 @@ function RolesPorPantalla() {
       console.log(list)
     }
     getData()
-  }, [])
+  }, [visible])
 
   const toggleDetails = (roleId) => {
     const newDetails = details.includes(roleId)
@@ -83,10 +84,10 @@ function RolesPorPantalla() {
       formData.usua_UsuarioEliminacion = 1
       formData.role_FechaEliminacion = nuevaFechaEliminacion.toISOString()
       console.log(formData, 'rol para eliminar')
-      await eliminarRol(formData)
+      await RolEliminar(formData)
       setVisible(false)
     } catch (error) {
-      console.error('Error al crear el empleado:', error)
+      console.error('Error al eliminar el empleado:', error)
     }
   }
 
@@ -153,36 +154,26 @@ function RolesPorPantalla() {
                           size="sm"
                         ></CDropdownToggle>
                         <CDropdownMenu>
-                          <Link
-                            to={`editar/${item.role_Id}`}
-                            style={{ textDecoration: 'none', color: 'inherit' }}
-                          >
-                            <CDropdownItem>
-                              <CIcon
-                                icon={cilPencil}
-                                customClassName="nav-icon"
-                                width={16}
-                                height={16}
-                                style={{ marginRight: '5px' }}
-                              />
-                              Editar
-                            </CDropdownItem>
-                          </Link>
-                          <Link
-                            to={`detalle/${item.role_Id}`}
-                            style={{ textDecoration: 'none', color: 'inherit' }}
-                          >
-                            <CDropdownItem>
-                              <CIcon
-                                icon={cilSearch}
-                                customClassName="nav-icon"
-                                width={16}
-                                height={16}
-                                style={{ marginRight: '5px' }}
-                              />
-                              Detalle
-                            </CDropdownItem>
-                          </Link>
+                          <CDropdownItem onClick={() => navigate(`editar/${item.role_Id}`)}>
+                            <CIcon
+                              icon={cilPencil}
+                              customClassName="nav-icon"
+                              width={16}
+                              height={16}
+                              style={{ marginRight: '5px' }}
+                            />
+                            Editar
+                          </CDropdownItem>
+                          <CDropdownItem onClick={() => navigate(`detalle/${item.role_Id}`)}>
+                            <CIcon
+                              icon={cilSearch}
+                              customClassName="nav-icon"
+                              width={16}
+                              height={16}
+                              style={{ marginRight: '5px' }}
+                            />
+                            Detalle
+                          </CDropdownItem>
                           <CDropdownItem
                             onClick={() => {
                               setVisible(!visible)
@@ -196,7 +187,7 @@ function RolesPorPantalla() {
                               height={16}
                               style={{ marginRight: '5px' }}
                             />
-                            Editar
+                            Eliminar
                           </CDropdownItem>
                         </CDropdownMenu>
                       </CDropdown>
@@ -219,8 +210,8 @@ function RolesPorPantalla() {
                             {item.detalles &&
                               item.detalles.map((detalle, index) => (
                                 <tr key={index}>
-                                  <td>{detalle.role_Id}</td>
-                                  <td>{detalle.role_Descripcion}</td>
+                                  <td>{detalle.pant_Id}</td>
+                                  <td>{detalle.pant_Nombre}</td>
                                 </tr>
                               ))}
                           </tbody>

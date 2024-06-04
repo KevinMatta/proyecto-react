@@ -10,6 +10,8 @@ const EmpleadoCrear = React.lazy(() => import('./views/crud/empleados/crear'))
 const EmpleadoDetalle = React.lazy(() => import('./views/crud/empleados/detalle'))
 const RolesPorPantalla = React.lazy(() => import('./views/crud/roles-por-patalla/index'))
 const RolesPorPantallaCrear = React.lazy(() => import('./views/crud/roles-por-patalla/crear'))
+const RolesPorPantallaDetalle = React.lazy(() => import('./views/crud/roles-por-patalla/detalle'))
+const RolesPorPantallaEditar = React.lazy(() => import('./views/crud/roles-por-patalla/editar'))
 
 //theme
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -78,6 +80,16 @@ const routes = [
     path: '/theme/rolesporpantalla/crear',
     name: 'RolesporPantalla',
     element: RolesPorPantallaCrear,
+  },
+  {
+    path: '/theme/rolesporpantalla/detalle/:id',
+    name: 'RolesporPantalla',
+    element: RolesPorPantallaDetalle,
+  },
+  {
+    path: '/theme/rolesporpantalla/Editar/:id',
+    name: 'RolesporPantalla',
+    element: RolesPorPantallaEditar,
   },
   { path: '/theme/crud/empleados', name: 'Empleados', element: Empleados },
   { path: '/theme/crud/empleados/crear', name: 'Crear Empleado', element: EmpleadoCrear },

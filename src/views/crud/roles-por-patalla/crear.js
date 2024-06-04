@@ -17,6 +17,8 @@ import CIcon from '@coreui/icons-react'
 import { cilChevronRight, cilChevronBottom } from '@coreui/icons'
 import { getPantallas, RolInsertar } from '../../../services/rolesPorPantallaService'
 
+import { useNavigate } from 'react-router-dom'
+
 const TreeView = ({ nodos, handleCheckbox }) => {
   const [expandednodos, setExpandednodos] = useState({})
 
@@ -72,6 +74,7 @@ const TreeView = ({ nodos, handleCheckbox }) => {
 }
 
 function RolesPorPantallaCrear() {
+  const navigate = useNavigate()
   const [nodos, setnodos] = useState([])
   const [PantallasSeleccionadas, setPantallasSeleccionadas] = useState([])
   const [formData, setFormData] = useState({
@@ -153,8 +156,12 @@ function RolesPorPantallaCrear() {
       const idsFiltrados = PantallasSeleccionadas.filter((obj) => obj.pant_Id !== undefined)
       formData.pant_Ids = JSON.stringify(idsFiltrados)
       RolInsertar(formData)
-      navigate('/theme/crud/rolesporpantalla')
+      navigate('/theme/rolesporpantalla')
     }
+  }
+
+  const volver = () => {
+    navigate('/theme/rolesporpantalla')
   }
 
   return (
@@ -200,9 +207,14 @@ function RolesPorPantallaCrear() {
             </CCard>
           </div>
           <CCardFooter>
-            <CButton type="submit" color="primary">
-              Guardar
-            </CButton>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <CButton type="submit" color="primary">
+                Guardar
+              </CButton>
+              <CButton type="button" color="secondary" onClick={volver}>
+                Cancelar
+              </CButton>
+            </div>
           </CCardFooter>
         </CForm>
       </CCardBody>

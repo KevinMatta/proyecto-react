@@ -85,12 +85,12 @@ export const RolInsertar = async (formData) => {
     console.log(response.data, 'CREAR')
     return response.data
   } catch (error) {
-    console.error('Error al crear el empleado:', error)
+    console.error('Error al crear el rol:', error)
     throw error
   }
 }
 
-export const RolEliminar = async () => {
+export const RolEliminar = async (formData) => {
   try {
     const response = await axios.post(`${API_URL}api/Roles/Eliminar`, formData, {
       headers: {
@@ -101,7 +101,52 @@ export const RolEliminar = async () => {
     console.log(response.data, 'ELIMINAR')
     return response.data
   } catch (error) {
-    console.error('Error al crear el empleado:', error)
+    console.error('Error al eliminar el rol:', error)
     throw error
+  }
+}
+
+export const RolBuscar = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}api/Roles/Listar`, {
+      headers: {
+        XApiKey: API_KEY,
+      },
+    })
+
+    let roles = response.data.data
+
+    let role = roles.filter((rol) => {
+      if (rol.role_Id == id) {
+        if (rol.detalles) {
+          try {
+            rol.detalles = JSON.parse(rol.detalles.replace(/\\/g, ''))
+          } catch (parseError) {
+            console.log(`Error al parsear detalles del rol con id ${rol.id}`, parseError)
+            rol.detalles = []
+          }
+        }
+        return rol
+      }
+    })
+
+    return role[0]
+  } catch (err) {
+    console.log('Error al obtener datos', err)
+  }
+}
+
+export const RolEditar = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}api/Roles/Editar`, formData, {
+      headers: {
+        XApiKey: API_KEY,
+        EncryptionKey: API_ENCRIPTATION,
+        'Content-Type': 'application/json',
+      },
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error al editar el rol:', error)
   }
 }

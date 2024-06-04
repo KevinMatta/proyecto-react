@@ -43,18 +43,12 @@ const _nav = [
       },
     ],
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'Colors',
-  //   to: '/theme/colors',
-  //   icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Typography',
-  //   to: '/theme/typography',
-  //   icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  // },
+  {
+    component: CNavItem,
+    name: 'Roles Por Pantalla',
+    to: '/theme/rolesporpantalla',
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  },
   {
     component: CNavItem,
     name: 'Editar',
@@ -333,14 +327,13 @@ const _nav = [
     to: '/area',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
-    //Agregar la nueva entrada para revision
-    {
-      component: CNavItem,
-      name: 'Revision de calidad',
-      to: '/revision',
-      icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    },
-
+  //Agregar la nueva entrada para revision
+  {
+    component: CNavItem,
+    name: 'Revision de calidad',
+    to: '/revision',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav

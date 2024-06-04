@@ -47,7 +47,17 @@ const Login = () => {
       const response = await login({ usua_Nombre: email, usua_Contrasenia: password });
 
       if (response.code === 200) {
+        const { empl_EsAduana, role_Id, usua_EsAdmin } = response.data;
         console.log('Login successful:', response.data);
+        console.log('empl_EsAduana:', empl_EsAduana);
+        console.log('role_Id:', role_Id);
+        console.log('usua_EsAdmin:', usua_EsAdmin);
+
+        // Guardar los valores en sessionStorage
+        sessionStorage.setItem('empl_EsAduana', empl_EsAduana);
+        sessionStorage.setItem('role_Id', role_Id);
+        sessionStorage.setItem('usua_EsAdmin', usua_EsAdmin);
+
         navigate('/dashboard');
         setToast(exampleToast('Login successful', 'success'));
       } else {
@@ -104,7 +114,7 @@ const Login = () => {
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
-                          ¿olvide la contraseña?
+                          ¿Olvidé la contraseña?
                         </CButton>
                       </CCol>
                     </CRow>
@@ -114,13 +124,13 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Reguistrarse</h2>
+                    <h2>Registrarse</h2>
                     <p>
                       Este es un login diseñado para el aprendizaje de REACT.
                     </p>
                     <Link to="/register">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        ¡Reguistrase ahora!
+                        ¡Regístrate ahora!
                       </CButton>
                     </Link>
                   </div>

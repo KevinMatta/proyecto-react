@@ -12,6 +12,10 @@ import {
   CButton,
   CFormLabel,
   CFormSwitch,
+  CToaster,
+  CToast,
+  CToastHeader,
+  CToastBody,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilChevronRight, cilChevronBottom } from '@coreui/icons'
@@ -84,6 +88,7 @@ function RolesPorPantallaCrear() {
     usua_UsuarioCreacion: 1,
     role_FechaCreacion: '',
   })
+  const [marcarTodas, setMarcarTodas] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -160,65 +165,97 @@ function RolesPorPantallaCrear() {
     }
   }
 
+  const handleChangeMarcarTodas = (e) => {
+    const { checked } = e.target
+    setMarcarTodas(() => {
+      nodos.forEach((nodo, idx) => {
+        handleCheckbox(idx, !checked, nodo.nivel)
+      })
+      return checked
+    })
+  }
+
+  const exampleToast = (
+    <CToast color={notificacion.color}>
+      <CToastHeader closeButton>
+        <div className="fw-bold me-auto">{notificacion.titulo}</div>
+      </CToastHeader>
+      <CToastBody>{notificacion.mensaje}</CToastBody>
+    </CToast>
+  )
+
   const volver = () => {
     navigate('/pantallas/roles/index')
   }
 
   return (
-    <CCard>
-      <CCardHeader>Roles por Pantalla</CCardHeader>
-      <CCardBody>
-        <CForm
-          className="row g-3 needs-validation"
-          noValidate
-          validated={validated}
-          onSubmit={handleSubmit}
-        >
-          <CCol md={4}>
-            <CFormInput
-              type="text"
-              id="role_Descripcion"
-              name="role_Descripcion"
-              label="Rol"
-              placeholder="Roles"
-              aria-describedby="exampleFormControlInputHelpInline"
-              required
-              feedbackInvalid="Escriba un Rol"
-              // value={formData.role_Descripcion}
-              onChange={handleChange}
-            />
-          </CCol>
-          <CCol md={4}>
-            <CFormLabel htmlFor="role_Aduana">Es Aduana</CFormLabel>
-            <CFormSwitch
-              size="xl"
-              id="role_Aduana"
-              name="role_Aduana"
-              checked={formData.role_Aduana}
-              onChange={handleChange}
-            />
-          </CCol>
-          <div style={{ marginTop: '30px' }}>
-            <span>Pantallas</span>
-            <CCard>
-              <CCardBody>
-                <TreeView nodos={nodos} handleCheckbox={handleCheckbox} />
-              </CCardBody>
-            </CCard>
-          </div>
-          <CCardFooter>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <CButton type="submit" color="primary">
-                Guardar
-              </CButton>
-              <CButton type="button" color="secondary" onClick={volver}>
-                Cancelar
-              </CButton>
+    <>
+      <CCard>
+        <CCardHeader>Roles por Pantalla</CCardHeader>
+        <CCardBody>
+          <CForm
+            className="row g-3 needs-validation"
+            noValidate
+            validated={validated}
+            onSubmit={handleSubmit}
+          >
+            <CCol md={4}>
+              <CFormInput
+                type="text"
+                id="role_Descripcion"
+                name="role_Descripcion"
+                label="Rol"
+                placeholder="Roles"
+                aria-describedby="exampleFormControlInputHelpInline"
+                required
+                feedbackInvalid="Escriba un Rol"
+                // value={formData.role_Descripcion}
+                onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={2}>
+              <CFormLabel htmlFor="role_Aduana">Es Aduana</CFormLabel>
+              <CFormSwitch
+                size="xl"
+                id="role_Aduana"
+                name="role_Aduana"
+                checked={formData.role_Aduana}
+                onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={4}>
+              <CFormLabel htmlFor="todas">Marcar Todo</CFormLabel>
+              <CFormSwitch
+                size="xl"
+                id="todas"
+                name="todas"
+                checked={marcarTodas}
+                onChange={handleChangeMarcarTodas}
+              />
+            </CCol>
+            <div style={{ marginTop: '30px' }}>
+              <span>Pantallas</span>
+              <CCard>
+                <CCardBody>
+                  <TreeView nodos={nodos} handleCheckbox={handleCheckbox} />
+                </CCardBody>
+              </CCard>
             </div>
-          </CCardFooter>
-        </CForm>
-      </CCardBody>
-    </CCard>
+            <CCardFooter>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <CButton type="submit" color="primary">
+                  Guardar
+                </CButton>
+                <CButton type="button" color="secondary" onClick={volver}>
+                  Cancelar
+                </CButton>
+              </div>
+            </CCardFooter>
+          </CForm>
+        </CCardBody>
+      </CCard>
+      <CToaster className="p-3" placement="top-end" push={toast} ref={toaster} />
+    </>
   )
 }
 

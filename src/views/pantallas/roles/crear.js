@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   CFormCheck,
   CCard,
@@ -97,6 +97,14 @@ function RolesPorPantallaCrear() {
     }
     getData()
   }, [])
+  const [notificacion, setNotificacion] = useState({
+    estado: '',
+    color: '',
+    titulo: '',
+    mensaje: '',
+  })
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
 
   const handleCheckbox = (id, checked, nivel) => {
     const toggleCheck = (nodos) => {

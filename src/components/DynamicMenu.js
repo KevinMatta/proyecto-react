@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { CNavItem } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilNotes } from '@coreui/icons';
+import { CNavItem } from '@coreui/react';
 import { getPantallas, getRolesPorPantallas } from '../services/authService';
+import { cilNotes } from '@coreui/icons';
 
 const DynamicMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -10,27 +10,38 @@ const DynamicMenu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const roleId = parseInt(sessionStorage.getItem('role_Id'));
-        const rolesPantallasResponse = await getRolesPorPantallas(roleId);
-        const rolesPantallas = rolesPantallasResponse;
-
         const pantallasResponse = await getPantallas();
         const pantallas = pantallasResponse.data;
+        console.log('pantallas:', pantallas);
+
+        if (!Array.isArray(pantallas)) {
+          throw new Error('Invalid data format for pantallas');
+        }
+
+        const rolesResponse = await getRolesPorPantallas();
+        const rolesPantallas = rolesResponse;
+        console.log('rolesPantallas:', rolesPantallas);
+
+        if (!Array.isArray(rolesPantallas)) {
+          throw new Error('Invalid data format for rolesPantallas');
+        }
 
         const isAdmin = sessionStorage.getItem('usua_EsAdmin') === 'true';
+        const roleId = parseInt(sessionStorage.getItem('role_Id'), 10);
         const isAduana = sessionStorage.getItem('empl_EsAduana') === 'true';
 
+        // Filtrar pantallas basadas en los criterios
         const filteredPantallas = pantallas.filter(pantalla => {
-          console.log('Checking pantalla:', pantalla);
-          const tieneAcceso = rolesPantallas.find(rolePantalla => rolePantalla.pant_Id === pantalla.pant_Id);
-          console.log('Tiene acceso:', tieneAcceso);
-          const mostrarPantalla = isAdmin ? pantalla.pant_EsAduana === isAduana : (pantalla.pant_EsAduana === isAduana && tieneAcceso);
-          console.log('Mostrar pantalla:', mostrarPantalla);
-          return mostrarPantalla;
+          if (isAdmin) {
+            return pantalla.pant_EsAduana === isAduana;
+          } else {
+            return rolesPantallas.some(rolePantalla => rolePantalla.pant_Id === pantalla.pant_Id);
+          }
         });
 
-        console.log('Filtered pantallas:', filteredPantallas);
+        console.log('filteredPantallas:', filteredPantallas);
 
+        // Transformar las pantallas filtradas en el formato necesario para el menú
         const navItems = filteredPantallas.map(pantalla => ({
           component: CNavItem,
           name: pantalla.pant_Nombre,
@@ -38,10 +49,9 @@ const DynamicMenu = () => {
           icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
         }));
 
-        console.log('NavItems:', navItems);
         setMenuItems(navItems);
       } catch (error) {
-        console.error('Error fetching the menu:', error);
+        console.error('Error fetching the menu:', error.message);
       }
     };
 

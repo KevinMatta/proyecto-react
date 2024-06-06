@@ -30,8 +30,9 @@ export const getPantallas = async () => {
   }
 };
 
-export const getRolesPorPantallas = async (roleId) => {
+export const getRolesPorPantallas = async () => {
   try {
+    const roleId = sessionStorage.getItem('role_Id');
     const response = await axios.get(`${API_URL}/RolesPorPantallas/Listar?role_Id=${roleId}`, { headers });
     return response.data;
   } catch (error) {

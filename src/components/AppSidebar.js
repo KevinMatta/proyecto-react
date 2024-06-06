@@ -45,7 +45,7 @@ const AppSidebar = () => {
           onClick={() => dispatch({ type: 'set', sidebarShow: false })}
         />
       </CSidebarHeader>
-      <AppSidebarNav items={menuItems} /> {/* Pasa los items aquí */}
+      <AppSidebarNav items={Array.isArray(menuItems) ? menuItems : []} /> {/* Pasa los items aquí */}
       <CSidebarFooter className="border-top d-none d-lg-flex">
         <CSidebarToggler
           onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CIcon from '@coreui/icons-react';
 import { CNavItem, CNavGroup } from '@coreui/react';
 import { getPantallas, getRolesPorPantallas } from '../services/authService';
-import { cilNotes,cilBell, cilChevronBottom,cilLibrary } from '@coreui/icons';
+import { cilNotes, cilLibrary } from '@coreui/icons';
 
 const DynamicMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -19,7 +19,7 @@ const DynamicMenu = () => {
         }
 
         const rolesResponse = await getRolesPorPantallas();
-        const rolesPantallas = rolesResponse;
+        const rolesPantallas = rolesResponse || [];
         console.log('rolesPantallas:', rolesPantallas);
 
         if (!Array.isArray(rolesPantallas)) {
@@ -30,18 +30,18 @@ const DynamicMenu = () => {
         const roleId = parseInt(sessionStorage.getItem('role_Id'), 10);
         const isAduana = sessionStorage.getItem('empl_EsAduana') === 'true';
 
-        // Filtrar pantallas basadas en los criterios
-        const filteredPantallas = pantallas.filter(pantalla => {
-          if (isAdmin) {
-            return pantalla.pant_EsAduana === isAduana;
-          } else {
-            return rolesPantallas.some(rolePantalla => rolePantalla.pant_Id === pantalla.pant_Id);
-          }
-        });
+        let filteredPantallas = [];
+
+        if (isAdmin) {
+          filteredPantallas = pantallas.filter(pantalla => pantalla.pant_EsAduana === isAduana);
+        } else if (roleId && roleId !== 0) {
+          filteredPantallas = pantallas.filter(pantalla => rolesPantallas.some(rolePantalla => rolePantalla.pant_Id === pantalla.pant_Id));
+        } else if (isAduana) {
+          filteredPantallas = pantallas.filter(pantalla => pantalla.pant_EsAduana === isAduana);
+        }
 
         console.log('filteredPantallas:', filteredPantallas);
 
-        // Agrupar las pantallas por esquema
         const groupedPantallas = filteredPantallas.reduce((groups, pantalla) => {
           const esquema = pantalla.pant_Esquema;
           if (!groups[esquema]) {
@@ -51,7 +51,6 @@ const DynamicMenu = () => {
           return groups;
         }, {});
 
-        // Mapear los esquemas a los nombres de grupos
         const esquemaNames = {
           Acce: 'Acceso',
           Gral: 'General',
@@ -60,7 +59,6 @@ const DynamicMenu = () => {
           Repo: 'Reportes'
         };
 
-        // Crear los items del menú
         const navItems = Object.keys(groupedPantallas).map(esquema => ({
           component: CNavGroup,
           name: esquemaNames[esquema] || esquema,

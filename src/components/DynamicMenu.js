@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CIcon from '@coreui/icons-react';
-import { CNavItem } from '@coreui/react';
+import { CNavItem, CNavGroup } from '@coreui/react';
 import { getPantallas, getRolesPorPantallas } from '../services/authService';
-import { cilNotes } from '@coreui/icons';
+import { cilNotes,cilBell, cilChevronBottom,cilLibrary } from '@coreui/icons';
 
 const DynamicMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -41,12 +41,36 @@ const DynamicMenu = () => {
 
         console.log('filteredPantallas:', filteredPantallas);
 
-        // Transformar las pantallas filtradas en el formato necesario para el menú
-        const navItems = filteredPantallas.map(pantalla => ({
-          component: CNavItem,
-          name: pantalla.pant_Nombre,
-          to: pantalla.pant_URL,
-          icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+        // Agrupar las pantallas por esquema
+        const groupedPantallas = filteredPantallas.reduce((groups, pantalla) => {
+          const esquema = pantalla.pant_Esquema;
+          if (!groups[esquema]) {
+            groups[esquema] = [];
+          }
+          groups[esquema].push(pantalla);
+          return groups;
+        }, {});
+
+        // Mapear los esquemas a los nombres de grupos
+        const esquemaNames = {
+          Acce: 'Acceso',
+          Gral: 'General',
+          Adua: 'Aduana',
+          Prod: 'Producción',
+          Repo: 'Reportes'
+        };
+
+        // Crear los items del menú
+        const navItems = Object.keys(groupedPantallas).map(esquema => ({
+          component: CNavGroup,
+          name: esquemaNames[esquema] || esquema,
+          icon: <CIcon icon={cilLibrary} customClassName="nav-icon" />,
+          items: groupedPantallas[esquema].map(pantalla => ({
+            component: CNavItem,
+            name: pantalla.pant_Nombre,
+            to: pantalla.pant_URL,
+            //icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+          }))
         }));
 
         setMenuItems(navItems);

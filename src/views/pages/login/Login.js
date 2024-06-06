@@ -47,16 +47,13 @@ const Login = () => {
       const response = await login({ usua_Nombre: email, usua_Contrasenia: password });
 
       if (response.code === 200) {
-        const { usua_esAduana, role_Id, usua_EsAdmin } = response.data;
+        const { empl_EsAduana, role_Id, usua_EsAdmin, usua_URLInicial } = response.data;
         console.log('Login successful:', response.data);
-        console.log('usua_esAduana:', usua_esAduana);
-        console.log('role_Id:', role_Id);
-        console.log('usua_EsAdmin:', usua_EsAdmin);
 
-        // Guardar los valores en sessionStorage
-        sessionStorage.setItem('usua_esAduana', usua_esAduana);
+        sessionStorage.setItem('empl_EsAduana', empl_EsAduana);
         sessionStorage.setItem('role_Id', role_Id);
         sessionStorage.setItem('usua_EsAdmin', usua_EsAdmin);
+        sessionStorage.setItem('usua_URLInicial', usua_URLInicial);
 
         navigate('/dashboard');
         setToast(exampleToast('Login successful', 'success'));

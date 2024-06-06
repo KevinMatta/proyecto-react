@@ -6,7 +6,7 @@ const getSessionValue = (key) => sessionStorage.getItem(key);
 const ProtectedRoute = ({ element: Element, roles, ...rest }) => {
   const isAdmin = getSessionValue('usua_EsAdmin') === 'true';
   const roleId = getSessionValue('role_Id');
-  const isAduana = getSessionValue('usua_esAduana') === 'true';
+  const isAduana = getSessionValue('empl_EsAduana') === 'true';
 
   const hasAccess = () => {
     if (roles.includes('admin') && !isAdmin) return false;

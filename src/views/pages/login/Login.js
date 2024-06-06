@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -12,11 +12,62 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+  CToast,
+  CToastBody,
+  CToastHeader,
+  CToaster,
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { cilLockLocked, cilUser } from '@coreui/icons';
+import { login } from '../../../services/authService';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [toast, setToast] = useState(0);
+  const toaster = useRef();
+  const navigate = useNavigate();
+
+  const exampleToast = (message, color) => (
+    <CToast autohide={true} delay={5000} color={color}>
+      <CToastHeader closeButton>
+        <strong className="me-auto">Notificación</strong>
+        <small>Ahora</small>
+      </CToastHeader>
+      <CToastBody>{message}</CToastBody>
+    </CToast>
+  );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await login({ usua_Nombre: email, usua_Contrasenia: password });
+
+      if (response.code === 200) {
+        const { empl_EsAduana, role_Id, usua_EsAdmin, usua_URLInicial } = response.data;
+        console.log('Login successful:', response.data);
+
+        sessionStorage.setItem('empl_EsAduana', empl_EsAduana);
+        sessionStorage.setItem('role_Id', role_Id);
+        sessionStorage.setItem('usua_EsAdmin', usua_EsAdmin);
+        sessionStorage.setItem('usua_URLInicial', usua_URLInicial);
+
+        navigate('/dashboard');
+        setToast(exampleToast('Login successful', 'success'));
+      } else {
+        setError('El usuario o contraseña son incorrectos');
+        setToast(exampleToast('El usuario o contraseña son incorrectos', 'danger'));
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+      setError('Error al conectar con el servidor');
+      setToast(exampleToast('Error al conectar con el servidor', 'danger'));
+    }
+  };
+
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -25,14 +76,20 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
-                    <p className="text-body-secondary">Sign In to your account</p>
+                    <p className="text-body-secondary">Inicia sesión en tu cuenta</p>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput
+                        placeholder="Usuario"
+                        autoComplete="username"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -40,19 +97,21 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         type="password"
-                        placeholder="Password"
+                        placeholder="Contraseña"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
-                          Login
+                        <CButton type="submit" color="primary" className="px-4">
+                          ENTRAR
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
-                          Forgot password?
+                          ¿Olvidé la contraseña?
                         </CButton>
                       </CCol>
                     </CRow>
@@ -62,14 +121,13 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2>Registrarse</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      Este es un login diseñado para el aprendizaje de REACT.
                     </p>
                     <Link to="/register">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        Register Now!
+                        ¡Regístrate ahora!
                       </CButton>
                     </Link>
                   </div>
@@ -79,8 +137,9 @@ const Login = () => {
           </CCol>
         </CRow>
       </CContainer>
+      <CToaster ref={toaster} push={toast} placement="top-end" />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

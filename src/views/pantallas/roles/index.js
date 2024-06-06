@@ -151,7 +151,7 @@ function RolesPorPantalla() {
       console.error('Error al eliminar el empleado:', error)
       setNotificacion({
         estado: 'eliminar',
-        color: 'error',
+        color: 'danger',
         titulo: 'Error',
         mensaje: 'error en la peticion',
       })

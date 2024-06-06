@@ -33,6 +33,7 @@ function RolesPorPantallaEditar() {
     usua_UsuarioModificacion: 1,
     role_FechaModificacion: '',
   })
+  const [marcarTodas, setMarcarTodas] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -67,6 +68,12 @@ function RolesPorPantallaEditar() {
         })
 
         setnodos(updatedEsquema)
+        updatedEsquema.forEach((item) => {
+          if (item.checked) setMarcarTodas(true)
+          else {
+            setMarcarTodas(false)
+          }
+        })
         console.log(updatedEsquema)
       } else {
         setnodos(pantallas)
@@ -110,6 +117,16 @@ function RolesPorPantallaEditar() {
       ...prevFormData,
       [name]: type === 'checkbox' ? checked : value,
     }))
+  }
+
+  const handleChangeMarcarTodas = (e) => {
+    const { checked } = e.target
+    setMarcarTodas(() => {
+      nodos.forEach((nodo, idx) => {
+        handleCheckbox(idx, !checked, nodo.nivel)
+      })
+      return checked
+    })
   }
 
   const updatePantallasSeleccionadas = (id, nombre, checked) => {
@@ -184,6 +201,16 @@ function RolesPorPantallaEditar() {
                 name="role_Aduana"
                 checked={formData.role_Aduana}
                 onChange={handleChange}
+              />
+            </CCol>
+            <CCol md={4}>
+              <CFormLabel htmlFor="todas">Marcar Todo</CFormLabel>
+              <CFormSwitch
+                size="xl"
+                id="todas"
+                name="todas"
+                checked={marcarTodas}
+                onChange={handleChangeMarcarTodas}
               />
             </CCol>
             <div style={{ marginTop: '30px' }}>

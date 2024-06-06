@@ -88,23 +88,54 @@ function RolesPorPantallaCrear() {
     usua_UsuarioCreacion: 1,
     role_FechaCreacion: '',
   })
+  const [toast, addToast] = useState(0)
+  const toaster = useRef()
   const [marcarTodas, setMarcarTodas] = useState(false)
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getPantallas()
-      setnodos(data)
-    }
-    getData()
-  }, [])
   const [notificacion, setNotificacion] = useState({
     estado: '',
     color: '',
     titulo: '',
     mensaje: '',
   })
-  const [toast, addToast] = useState(0)
-  const toaster = useRef()
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPantallas()
+      setnodos(data)
+      setNotificacion({
+        estado: '',
+        color: '',
+        titulo: '',
+        mensaje: '',
+      })
+    }
+    getData()
+  }, [])
+
+  useEffect(() => {
+    console.log('effect notify')
+    const notify = () => {
+      if (notificacion.estado == 'eliminar') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == 'editar') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == 'crear') {
+        addToast(exampleToast)
+      }
+      if (notificacion.estado == '') {
+        // sesionStorage.notificacion
+      }
+      setNotificacion({
+        estado: '',
+        color: '',
+        titulo: '',
+        mensaje: '',
+      })
+    }
+    notify()
+  }, [notificacion.estado])
 
   const handleCheckbox = (id, checked, nivel) => {
     const toggleCheck = (nodos) => {
@@ -153,7 +184,7 @@ function RolesPorPantallaCrear() {
   }
 
   const [validated, setValidated] = useState(false)
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     event.stopPropagation()
     const nuevaFechaCreacion = new Date()
@@ -168,8 +199,32 @@ function RolesPorPantallaCrear() {
       )
       const idsFiltrados = PantallasSeleccionadas.filter((obj) => obj.pant_Id !== undefined)
       formData.pant_Ids = JSON.stringify(idsFiltrados)
-      RolInsertar(formData)
-      navigate('/pantallas/roles/index')
+      try {
+        const res = await RolInsertar(formData)
+        console.log(res.data.messageStatus, 'res data crear mensaje')
+        if (res.data.messageStatus == 1) {
+          notificacion.estado = 'crear'
+          notificacion.color = 'success'
+          notificacion.titulo = 'Exito'
+          notificacion.mensaje = 'Rol creado con exito'
+          setFormData((prev) => ({ ...prev, role_Descripcion: '' }))
+          setTimeout(() => {
+            navigate('/pantallas/roles/index')
+          }, 100)
+        } else {
+          notificacion.estado = 'crear'
+          notificacion.color = 'warning'
+          notificacion.titulo = 'Advertencia'
+          notificacion.mensaje = 'No se pudo crear el rol'
+        }
+      } catch (err) {
+        console.error(err, 'error servidor crear')
+        notificacion.estado = 'crear'
+        notificacion.color = 'danger'
+        notificacion.titulo = 'Error'
+        notificacion.mensaje = 'error en la peticion'
+      }
+      console.log(notificacion)
     }
   }
 
@@ -217,7 +272,7 @@ function RolesPorPantallaCrear() {
                 aria-describedby="exampleFormControlInputHelpInline"
                 required
                 feedbackInvalid="Escriba un Rol"
-                // value={formData.role_Descripcion}
+                value={formData.role_Descripcion}
                 onChange={handleChange}
               />
             </CCol>
